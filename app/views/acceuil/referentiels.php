@@ -24,7 +24,7 @@ return function ($data) {
 
 
         <div class="Cherche">
-            <div class="search1">
+            <div class="search12">
                 <form action="" method="get">
                     <input class="search1" type="text" name="recherche" placeholder="Rechercher un referentiel">
                 </form>

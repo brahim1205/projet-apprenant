@@ -91,35 +91,54 @@
     border-radius: 10px 10px 10px 10px;
 }
 
-.Cherche>div {
+.Gril {
     border-radius: 10px 10px 10px 10px;
     font-weight: 600;
     display: flex;
+    justify-content: center;
+    align-items: center;
     height: 98%;
     width: 100%;
 }
 
-.search1 {
-    background-color: var(--White);
+.filtre1 {
+    font-weight: 600;
+    display: flex;
+    height: 98%;
+    width: 100%;
+    border-radius: 10px 10px 10px 10px;
+    font-family: Arial;
+    font-weight: bold;
+}
+
+.search12 {
     flex: 3;
     height: 100%;
     width: 100%;
+    margin-top: -15px;
     /* border: solid 1px var(--Orange); */
 }
 
-.search1 form {
-    background-color: var(--White);
+input[name="recherche"] {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
     width: 100%;
-    height: 95%
+    border-radius: 10px 10px 10px 10px;
+    background-color: var(--White);
 }
 
-.search1 input {
-    background-color: var(--White);
+.search12 form {
     width: 100%;
-    height: 90%;
-    margin-top: -1px;
-    margin-left: -1px;
-    border-radius: 10px 10px 10px 10px;
+    height: 95%;
+    /* background-color: var(--White); */
+    /* margin-top: -3px; */
+}
+
+.Cherche input[type="text"] {
+    background-color: var(--White);
+    width: 98%;
     border: none;
 }
 

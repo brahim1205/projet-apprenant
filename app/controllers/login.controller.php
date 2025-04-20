@@ -41,8 +41,8 @@ function logout()
 
 function changerPassword(array $params, array &$donnee, array $con,$controller): void {
     $email = $params['email'] ?? '';
-    $newPassword = $params['newPassword'] ?? '';
-
+    $newPassword = $params['password'] ?? '';
+    
     if (empty($email) || empty($newPassword)) {
         $_SESSION['message'] = Textes::TLO->value;
         $controller[Fonction::Redirection->value]("MDP");
@@ -50,10 +50,11 @@ function changerPassword(array $params, array &$donnee, array $con,$controller):
 
     if (!$con["TrouverMail"]($email, $donnee["database"])) {
         $_SESSION['message'] = Textes::EMAILINT->value;
+    
         $controller[Fonction::Redirection->value]("MDP");
     }
 
-    if ($con["ChangerPassword"]($email, $newPassword, $donnee["database"])) {
+    if ($con["changerPassword"]($email, $newPassword, $donnee["database"])) {
         $_SESSION['message'] = Textes::ChangePassSUC->value;
         file_put_contents(
             $donnee["databaseFile"],

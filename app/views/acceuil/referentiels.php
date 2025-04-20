@@ -26,7 +26,7 @@ return function ($data) {
         <div class="Cherche">
             <div class="search1">
                 <form action="" method="get">
-                    <input type="text" name="recherche" placeholder="Rechercher un referentiel">
+                    <input class="search1" type="text" name="recherche" placeholder="Rechercher un referentiel">
                 </form>
             </div>
             <div class="filtre1">
@@ -35,7 +35,7 @@ return function ($data) {
                 
             </div>
 
-           <a href="" class="preA"><div class="Gril">+ Ajouter à la promotion</div></a> 
+          <div class="Gril" id="openModal">+ Ajouter à la promotion</div>
             
         </div>
 
@@ -66,73 +66,7 @@ return function ($data) {
                 <p>Aucune promotion disponible.</p>
             <?php endif; ?>
 
-            <!-- <div class="item-ref">
-                <div class="containImage"><img src="" alt=""></div>
-                <div class="titre-ref">Réferent digital</div>
-                <div class="nb-modules">4 modules.</div>
-                <div class="desc-ref">Contre-indices de synthétique, le référence digital pathique...</div>
-                <div class="Lvert"></div>
-                <div class="derL">
-                    <div class="poin">
-                        <span class="points1"></span>
-                        <span class="points2"></span>
-                        <span class="points3"></span>
-                    </div>
-                    <div class="nbrAp"><p>2 Apprenants</p></div>
-                </div>
-
-            </div>
-
-            <div class="item-ref">
-                <div class="containImage"><img src="" alt=""></div>
-                <div class="titre-ref">Développement data</div>
-                <div class="nb-modules">5 modules.</div>
-                <div class="desc-ref">De manière de tracer à la date visualisateur, en passant par No...</div>
-                <div class="Lvert"></div>
-                <div class="derL">
-                    <div class="poin">
-                        <span class="points1"></span>
-                        <span class="points2"></span>
-                        <span class="points3"></span>
-                    </div>
-                    <div class="nbrAp"><p>2 Apprenants</p></div>
-                </div>
-
-            </div>
-
-            <div class="item-ref">
-                <div class="containImage"><img src="" alt=""></div>
-                <div class="titre-ref">Référent Digital</div>
-                <div class="nb-modules">1 module</div>
-                <div class="desc-ref">La formation d'autonomie digitale résumée est garante que...</div>
-                <div class="Lvert"></div>
-                <div class="derL">
-                    <div class="poin">
-                        <span class="points1"></span>
-                        <span class="points2"></span>
-                        <span class="points3"></span>
-                    </div>
-                    <div class="nbrAp"><p>2 Apprenants</p></div>
-                </div>
-
-            </div>
-
-            <div class="item-ref">
-                <div class="containImage"><img src="" alt=""></div>
-                <div class="titre-ref">AWS & DevOps</div>
-                <div class="nb-modules">8 modules.</div>
-                <div class="desc-ref">De l'énergie des besoins et monitoring de l'informatique, e...</div>
-                <div class="Lvert"></div>
-                <div class="derL">
-                    <div class="poin">
-                        <span class="points1"></span>
-                        <span class="points2"></span>
-                        <span class="points3"></span>
-                    </div>
-                    <div class="nbrAp"><p>2 Apprenants</p></div>
-                </div>
-
-            </div> -->
+     
         </div>
 
         <div class="pied-page">
@@ -141,38 +75,41 @@ return function ($data) {
     </div>
 </div>
 
-<a id="form-popup" class="overlay" href="#"></a>
-<div class="popbi">
-    <div class="popup">
-        <h2>Créer une nouvelle promotion</h2>
-        <?php
-           
-            if (isset($_SESSION['form_message'])) {
-                echo '<div class="error-message">'.htmlspecialchars($_SESSION['form_message']).'</div>';
-                unset($_SESSION['form_message']); 
-            }
-        ?>
-        <form action="/promotion" method="post" enctype="multipart/form-data">
-            <label for="nomPromo">Nom de la promotion</label>
-            <input type="text" id="nom" name="nomPromo" placeholder="Ex: Promotion 2025">
-       
-        <label for="photo">Photo de la promotion</label>
-        <div class="photdp">
-            <label for="photo" class="drop-area">
-                <span class="aj">Ajouter</span> ou Glisser
-            </label>
-            <input type="file" id="photo" name="photo" accept="image/*" style="display: none;">
-        </div>
-            <label for="referentiel">Référentiels</label>
-            <input type="search" id="referentiel" name="referentiel" placeholder="Rechercher un référentiel...">
 
-            <div class="actions">
-                <a href="#"><button type="button" class="cancel">Annuler</button></a>
-                <button type="submit" class="submit">Créer la promotion</button>
-            </div>
-        </form>
+
+
+<div class="modal" id="referentielModal">
+    <div class="modal-content">
+        <span class="close" id="closeModal">&times;</span>
+        <h2>Ajouter un référentiel</h2>
+
+        <label>Libellé référentiel</label>
+        <input type="text" value="Cloud & CyberSec" />
+
+        <label>Promotion active</label>
+        <div class="tags">
+            <div class="tag green">DEV WEB/MOBILE <span>×</span></div>
+            <div class="tag blue">REF DIG <span>×</span></div>
+            <div class="tag purple">DEV DATA <span>×</span></div>
+            <div class="tag orange">AWS <span>×</span></div>
+            <div class="tag red">HACKEUSE <span>×</span></div>
+        </div>
+
+        <button class="btn-submit">Terminer</button>
     </div>
 </div>
+
+<script>
+    const openBtn = document.getElementById("openModal");
+    const modal = document.getElementById("referentielModal");
+    const closeBtn = document.getElementById("closeModal");
+
+    openBtn.onclick = () => modal.style.display = "flex";
+    closeBtn.onclick = () => modal.style.display = "none";
+    window.onclick = (e) => {
+        if (e.target === modal) modal.style.display = "none";
+    };
+</script>
 </html>
 <?php
     return ob_get_clean(); 

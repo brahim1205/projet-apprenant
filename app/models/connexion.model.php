@@ -29,12 +29,14 @@ Fonction::TrouverMail->value => function(string $email ,array $database ){
 
     array_walk($database, function($users) use ($email, &$trouve) {
         array_walk($users, function($user) use ($email, &$trouve) {
+          
             if (
                 (
                     (isset($user['matricule']) && $user['matricule'] === $email) ||
                     (isset($user['gmail']) && $user['gmail'] === $email)
                 )
             ) {
+
                 $trouve = true;
             }
         });
@@ -45,7 +47,7 @@ Fonction::TrouverMail->value => function(string $email ,array $database ){
 
 Fonction::ChangerPassword->value => function(string $email, string $newPassword, array &$database): bool {
     $trouve = false;
-
+    
     array_walk($database, function (&$users) use ($email, $newPassword, &$trouve) {
         array_walk($users, function (&$user) use ($email, $newPassword, &$trouve) {
             if (
@@ -54,6 +56,7 @@ Fonction::ChangerPassword->value => function(string $email, string $newPassword,
             ) {
                 $user['password'] = $newPassword;
                 $trouve = true;
+                
             }
         });
     });

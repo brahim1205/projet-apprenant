@@ -7,12 +7,11 @@ enum Fonction: string{
     case Req = "require";
     case Connexion = "connexion";
     case TrouverMail = "TrouverMail";
-    case ChangerPassword = "ChangerPassword";
+    case ChangerPassword = "changerPassword";
     case Redirection = "redirection";
     case Render = "render";
     case handleError = "handleError";
     case Login = "login";
-    case changerPassword = "changerPassword";
     case Logout = "logout";
     case ajoutPromo = "ajoutPromo";
     case afficherAllPromos = "afficherAllPromo";

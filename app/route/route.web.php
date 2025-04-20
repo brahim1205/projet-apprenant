@@ -4,15 +4,46 @@ declare(strict_types=1);
 use App\Controllers;
 use App\Enums\Fonction\Fonction;
 
+session_start();
+
+$path = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
+
+$allowedPaths = ['/login', '/logout', '/MDP'];
+
+if (in_array($path, $allowedPaths, true)) {
+    $authController = require __DIR__ . Chemins::Controller->value;
+
+    if ($path === '/login') {
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            $authController['login']($_POST);
+        } else {
+            include __DIR__ . Chemins::ViewLogin->value;
+        }
+    } elseif ($path === '/logout') {
+        $authController['logout']();
+    } elseif ($path === '/MDP') {
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            $authController['changerPassword']($_POST);
+        } else {
+            include __DIR__ . Chemins::ChangePass->value;
+        }
+    }
+
+    exit;
+}
+
+if (!isset($_SESSION['user'])) {
+    header('Location: /login');
+    exit;
+}
+
 $promotionController = require __DIR__ . Chemins::PromoController->value;
 $referentielController = require __DIR__ . Chemins::RefController->value;
 $authController = require __DIR__ . Chemins::Controller->value;
 
 $routes = [
     '/promotion' => function() use ($promotionController) {
-        
         $recherche = $_GET['recherche'] ?? '';
-
         if (!empty($recherche)) {
             $promotionController['trouverPromoGrille']($recherche);
         } else {
@@ -20,19 +51,14 @@ $routes = [
         }
     },
 
-
     '/promotion/liste' => function() use ($promotionController) {
         $recherche = $_GET['recherche'] ?? '';
-
         if (!empty($recherche)) {
-                $promotionController['trouverPromoListe']($recherche);
+            $promotionController['trouverPromoListe']($recherche);
         } else {
             $promotionController['affichageListe']();
         }
     },
-
-
-
 
     '/promotion/ajout' => function() use ($promotionController) {
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -46,9 +72,6 @@ $routes = [
         }
     },
 
-
-
-
     '/referentiels' => $referentielController['affichageRef'],
 
     '/referentiels/ajout' => function() use ($referentielController) {
@@ -60,32 +83,7 @@ $routes = [
             );
         }
     },
-
-    '/login' => function() use ($authController) {
-        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
- 
-            $authController['login']($_POST);
-        } else {
-            include __DIR__ . Chemins::ViewLogin->value;
-        }
-    },
-
-    '/logout' => function() use ($authController) {
-        $authController['logout']();
-    },
-
-    '/MDP' => function() use ($authController) {
-        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-            $authController['changerPassword']($_POST);
-        } else {
-            include __DIR__ . Chemins::ChangePass->value;
-        }
-    },
 ];
-
-
-
-$path = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
 
 if (isset($routes[$path])) {
     $handler = $routes[$path];

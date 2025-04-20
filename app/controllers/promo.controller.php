@@ -2,6 +2,7 @@
 declare(strict_types=1);
 
 namespace App\Controllers;
+use App\Enums\Fonction\Fonction;
 use App\MESS\Enums\Textes;
 use Chemins;
 
@@ -182,24 +183,24 @@ $ListePromotion = include __DIR__ . Chemins::PromotionListe->value;
 
 
 return [
-    'ajoutPromo' => function(array $params) use ($validator, $servicePromo) {
+    Fonction::ajoutPromo->value => function(array $params) use ($validator, $servicePromo) {
         ajoutPromo($params, $validator, $servicePromo);
     },
-    'affichageAllPromo' => function() use ($servicePromo) {
+    Fonction::afficherAllPromos->value => function() use ($servicePromo) {
 
         affichageAllPromo($servicePromo);
     },
 
-    'affichageListe' => function() use ($servicePromo) {
+    Fonction::AffichageListe->value => function() use ($servicePromo) {
 
         affichageListe($servicePromo);
     },
 
-    'trouverPromoGrille'=>function($nomPromo) use ($servicePromo,$grillePromotion) {
+    Fonction::trouverPromoGrille->value => function($nomPromo) use ($servicePromo,$grillePromotion) {
        return trouverPromo($nomPromo, $servicePromo, $grillePromotion);
     },
 
-    'trouverPromoListe'=>function($nomPromo) use ($servicePromo,$ListePromotion) {
+    Fonction::trouverPromoListe->value => function($nomPromo) use ($servicePromo,$ListePromotion) {
         return trouverPromo($nomPromo, $servicePromo, $ListePromotion);
      }
 ];

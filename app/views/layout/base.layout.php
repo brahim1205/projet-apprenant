@@ -1,9 +1,9 @@
 <?php
 use App\MESS\Enums\Textes;
-if (!isset($_SESSION['user'])) {
-    header("Location: /login");
-    exit();
-}
+// if (!isset($_SESSION['user'])) {
+//     header("Location: /login");
+//     exit();
+// }
 ?>
 
 <?php 

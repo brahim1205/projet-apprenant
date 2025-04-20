@@ -1,9 +1,11 @@
 <?php
 declare(strict_types=1);
-namespace App\Services;
+namespace App\Model;
+
+use App\Enums\Fonction\Fonction;
 
 return [
-'connexion' => function(string $matricule, string $password, string $email, array $database): bool {
+Fonction::Connexion->value => function(string $matricule, string $password, string $email, array $database): bool {
     $trouve = false;
 
     array_walk($database, function($users) use ($matricule, $password, $email, &$trouve) {
@@ -22,7 +24,7 @@ return [
 
     return $trouve;
 },
-'TrouverMail'=>function(string $email ,array $database ){
+Fonction::TrouverMail->value => function(string $email ,array $database ){
     $trouve = false;
 
     array_walk($database, function($users) use ($email, &$trouve) {
@@ -41,7 +43,7 @@ return [
     return $trouve;
 },
 
-'ChangerPassword' => function(string $email, string $newPassword, array &$database): bool {
+Fonction::ChangerPassword->value => function(string $email, string $newPassword, array &$database): bool {
     $trouve = false;
 
     array_walk($database, function (&$users) use ($email, $newPassword, &$trouve) {

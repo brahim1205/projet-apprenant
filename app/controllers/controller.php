@@ -4,24 +4,24 @@
 declare(strict_types=1);
 
 namespace App\Controllers;
-
-require_once __DIR__ . "/../enums/Textes.php";
-use App\MESS\Enums\Textes;
 use Chemins;
-
-
-function redirection(string $routes): void {
-    header("Location:/" . $routes);
-    exit;
-}
-function handleError(string $message): void {
-    $_SESSION['error'] = $message;
-    redirection("login");
-}
+// include __DIR__ .Chemins::EnumFonction->value;
+use App\Enums\Fonction\Fonction;
 
 return [
-    'redirection' => 'App\Controllers\redirection',
-    'handleError' => 'App\Controllers\handleError',
-    'validateFields' => 'App\Controllers\validateFields',
-    'login' => 'App\Controllers\login',
+    Fonction::Redirection->value => function(string $routes): void {
+        header("Location:/" . $routes);
+        exit;
+    },
+
+    Fonction::Inclusion->value => fn(string $routes) =>include __DIR__ . $routes,
+
+    Fonction::ReqOnce->value => fn(string $routes) =>require_once __DIR__ . $routes,
+
+    Fonction::Req->value => fn(string $routes) =>require __DIR__ . $routes,
+
+    Fonction::Render->value => fn(string $routes) =>require __DIR__ . $routes,
+
+    
+
 ];

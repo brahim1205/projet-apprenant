@@ -2,6 +2,7 @@
 declare(strict_types=1);
 
 use App\Controllers;
+use App\Enums\Fonction\Fonction;
 
 $promotionController = require __DIR__ . Chemins::PromoController->value;
 $referentielController = require __DIR__ . Chemins::RefController->value;
@@ -15,7 +16,7 @@ $routes = [
         if (!empty($recherche)) {
             $promotionController['trouverPromoGrille']($recherche);
         } else {
-            $promotionController['affichageAllPromo']();
+            $promotionController['afficherAllPromo']();
         }
     },
 

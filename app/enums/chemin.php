@@ -1,6 +1,7 @@
 <?php
 enum Chemins: string {
     case Dashboard = '/../views/acceuil/dashboard.php';
+    case EnumFonction='/../enums/fonctionEnumu.php';
     case PopupAjouter= '/../views/acceuil/popup.ajouter.php';
     case ViewLogin = '/../views/login/connexion.html.php';
     case ChangePass = '/../views/login/mdpOublie.html.php';

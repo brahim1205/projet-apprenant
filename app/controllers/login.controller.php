@@ -1,19 +1,21 @@
 <?php
 declare(strict_types=1);
 namespace App\Controllers;
+use App\Enums\Fonction\Fonction;
 require_once __DIR__ ."/../enums/Textes.php";
+$controller=require __DIR__ . "/controller.php";
+
+
+
 use App\MESS\Enums\Textes;
 use Chemins;
 
-$donnee = include __DIR__ . Chemins::Model->value;
-$con = include __DIR__ . Chemins::Service->value;
+$donnee = $controller[Fonction::Inclusion->value](Chemins::Model->value);
+$con = $controller[Fonction::Inclusion->value](Chemins::Service->value);
 
-function redirection(string $routes): void {
-    header("Location:/" . $routes);
-    exit;
-}
 
-function login(array $params, array $con, array &$donnee): void {
+
+function login(array $params, array $con, array &$donnee,$controller) : void {
     $id = $params['login'] ?? '';   
     $password = $params['password'] ?? '';  
 
@@ -22,7 +24,7 @@ function login(array $params, array $con, array &$donnee): void {
             'id' => $id,
             'password' => $password,
         ];
-        redirection("promotion");
+        $controller[Fonction::Redirection->value]("promotion");
     } else {
         $errors = [
             'msgId' => Textes::LogObli->value,
@@ -32,40 +34,48 @@ function login(array $params, array $con, array &$donnee): void {
     }
 }
 
+function logout()
+{
+    include __DIR__ . Chemins::Logout->value;
+}
 
-function changerPassword(array $params, array &$donnee, array $con): void {
+function changerPassword(array $params, array &$donnee, array $con,$controller): void {
     $email = $params['email'] ?? '';
     $newPassword = $params['newPassword'] ?? '';
 
     if (empty($email) || empty($newPassword)) {
-        $_SESSION['error'] = Textes::TLO->value;
-        redirection("MDP");
+        $_SESSION['message'] = Textes::TLO->value;
+        $controller[Fonction::Redirection->value]("MDP");
     }
 
     if (!$con["TrouverMail"]($email, $donnee["database"])) {
-        $_SESSION['error'] = Textes::EMAILINT->value;
-        redirection("MDP");
+        $_SESSION['message'] = Textes::EMAILINT->value;
+        $controller[Fonction::Redirection->value]("MDP");
     }
 
     if ($con["ChangerPassword"]($email, $newPassword, $donnee["database"])) {
-        $_SESSION['success'] = Textes::ChangePassSUC->value;
+        $_SESSION['message'] = Textes::ChangePassSUC->value;
         file_put_contents(
             $donnee["databaseFile"],
             json_encode($donnee["database"], JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE)
         );
-        redirection("login");
+        $controller[Fonction::Redirection->value]("login");
     } else {
         $_SESSION['error'] = Textes::ChangePassEr->value;;
-        redirection("MDP");
+        $controller[Fonction::Redirection->value]("MDP");
     }
 }
 
 
 return [
-    'login' => function(array $params) use ($con, &$donnee) {
-        login($params, $con, $donnee);
+    Fonction::Login->value => function(array $params) use ($con, &$donnee,$controller) {
+        login($params, $con, $donnee,$controller);
     },
-    'changerPassword' => function(array $params) use (&$donnee, $con) {
-        changerPassword($params, $donnee, $con);
+    Fonction::ChangerPassword->value => function(array $params) use (&$donnee, $con,$controller) {
+        changerPassword($params, $donnee, $con,$controller);
     },
+    Fonction::Logout->value =>function()
+    {
+        logout();
+    }
 ];

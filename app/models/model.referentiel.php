@@ -1,6 +1,8 @@
 <?php
+namespace App\ModelsRef;
+use App\Enums\Fonction\Fonction;
 return [
-    'ajouterRef' => function(array &$database, string $nomModule, int $nbrModule, string $desRef, int $nbrApr, $photoRef) {
+    Fonction::ajouterRef->value => function(array &$database, string $nomModule, int $nbrModule, string $desRef, int $nbrApr, $photoRef) {
         $database['Module'][] = [
             'Nom' => $nomModule,
             'NombresModule' => $nbrModule,
@@ -10,7 +12,7 @@ return [
         ];
         return true;
     },
-    'afficherAllRef' => fn($database) => $database['Referentiels'],
+    Fonction::afficherAllRef->value => fn($database) => $database['Referentiels'],
 
 ];
 ?>

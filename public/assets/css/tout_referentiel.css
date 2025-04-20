@@ -10,27 +10,13 @@
     --Rouge: rgb(161, 0, 0);
     --NoirsClair: rgba(0, 0, 0, 0.63);
     --NoirSuperClair: rgba(56, 56, 56, 0.055);
-    --color-bg-modal: #ffffff;
-    --color-shadow-modal: rgba(0, 0, 0, 0.1);
-    --color-input-bg: #f5f5f5;
-    --color-input-border: #e0e0e0;
-    --color-input-text: #333333;
-    --color-label: #555555;
-    --color-btn-submit-bg: #088d84;
-    --color-btn-submit-text: #ffffff;
-    --color-border-tags: #cccccc;
-    --color-btn-open-bg: #9de2d3;
-    --color-btn-open-text: #000;
-    --color-tag-devweb-bg: #d0f7e6;
-    --color-tag-devweb-text: #09805d;
-    --color-tag-refdig-bg: #e0f0ff;
-    --color-tag-refdig-text: #0d63c8;
-    --color-tag-devdata-bg: #f3ebff;
-    --color-tag-devdata-text: #8854d0;
-    --color-tag-aws-bg: #fff1e5;
-    --color-tag-aws-text: #e26a00;
-    --color-tag-hackeuse-bg: #ffe5ec;
-    --color-tag-hackeuse-text: #c8102e;
+    --color-primary: #9de2d3;
+    --color-bg: #fff;
+    --color-overlay: rgba(0, 0, 0, 0.3);
+    --color-border: #ccc;
+    --color-text: #777;
+    --color-close: #888;
+    --color-shadow: rgba(0, 0, 0, 0.2);
 }
 
 * {
@@ -88,6 +74,7 @@
     width: 100%;
     height: 7%;
     gap: 5px;
+    margin-top: 15px;
     border-radius: 10px 10px 10px 10px;
 }
 
@@ -115,8 +102,7 @@
     flex: 3;
     height: 100%;
     width: 100%;
-    margin-top: -15px;
-    margin-left: -30px;
+    margin-top: -40px;
     /* border: solid 1px var(--Orange); */
 }
 
@@ -352,109 +338,174 @@ input[name="recherche"] {
     top: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(0, 0, 0, 0.3);
-    justify-content: center;
-    align-items: center;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.5);
 }
 
 .modal-content {
-    background-color: var(--color-bg-modal);
-    padding: 25px;
-    border-radius: 10px;
-    width: 600px;
-    box-shadow: 0 0 10px var(--color-shadow-modal);
-    position: relative;
-}
-
-.modal-content h2 {
-    margin-top: 0;
-}
-
-label {
-    display: block;
-    margin-top: 15px;
-    color: var(--color-label);
-    font-size: 14px;
-    font-weight: 500;
-}
-
-input[type="text"] {
-    width: 100%;
-    padding: 12px;
-    border: 1px solid var(--color-input-border);
-    background-color: var(--color-input-bg);
-    border-radius: 8px;
-    font-size: 14px;
-    color: var(--color-input-text);
-    margin-top: 8px;
-}
-
-.tags {
     display: flex;
-    flex-wrap: wrap;
-    gap: 6px;
-    margin-top: 10px;
-    border: 1px dashed var(--color-border-tags);
-    padding: 10px;
-    border-radius: 10px;
-}
-
-.tag {
-    display: inline-flex;
+    flex-direction: column;
+    justify-content: center;
     align-items: center;
-    font-size: 13px;
-    padding: 5px 10px;
+    background-color: #fff;
+    margin: 5% auto;
+    padding: 20px;
     border-radius: 10px;
-    font-weight: 500;
+    width: 500px;
+    height: 600px;
+    max-width: 90%;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    animation: popupAppear 0.3s ease;
 }
 
-.tag span {
-    margin-left: 5px;
-    cursor: pointer;
+.cln {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    height: 10%;
 }
 
-.green {
-    background-color: var(--color-tag-devweb-bg);
-    color: var(--color-tag-devweb-text);
-}
-
-.blue {
-    background-color: var(--color-tag-refdig-bg);
-    color: var(--color-tag-refdig-text);
-}
-
-.purple {
-    background-color: var(--color-tag-devdata-bg);
-    color: var(--color-tag-devdata-text);
-}
-
-.orange {
-    background-color: var(--color-tag-aws-bg);
-    color: var(--color-tag-aws-text);
-}
-
-.red {
-    background-color: var(--color-tag-hackeuse-bg);
-    color: var(--color-tag-hackeuse-text);
-}
-
-.btn-submit {
-    margin-top: 20px;
-    background-color: var(--color-btn-submit-bg);
-    color: var(--color-btn-submit-text);
-    border: none;
-    padding: 10px 18px;
-    border-radius: 6px;
-    cursor: pointer;
-    font-weight: bold;
-    float: right;
+.modal-content form {
+    height: 90%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: start;
 }
 
 .close {
-    position: absolute;
-    top: 10px;
-    right: 15px;
-    font-size: 20px;
+    width: 5%;
+}
+
+.textar {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 450px;
+    height: 100px;
+}
+
+.nomref {
+    width: 450px;
+    height: 40px;
+    border-radius: 5px 5px 5px 5px;
+    background-color: var(--White);
+    border: solid 1px var(--NoirsClair);
+    margin-left: 0%;
+}
+
+.form-row {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    height: 20%;
+    gap: 8px;
+}
+
+.photdp {
+    width: 30%;
+    height: 150px;
+}
+
+.drop-area {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    padding: auto;
+    border: 2px dashed #ccc;
+    margin-left: 120%;
+    border-radius: 10px;
+    text-align: center;
+    color: #888;
+    background-color: #fafafa;
     cursor: pointer;
-    color: #999;
+    font-size: 14px;
+    transition: background-color 0.3s, border-color 0.3s;
+}
+
+.drop-area:hover {
+    background-color: #f0f0f0;
+    border-color: #aaa;
+}
+
+.capacite {
+    height: 36px;
+    border-radius: 5px 5px 5px 5px;
+    background-color: var(--White);
+    border: solid 1px var(--NoirsClair);
+    margin-left: 0%;
+}
+
+.select {
+    height: 36px;
+    border-radius: 5px 5px 5px 5px;
+    background-color: var(--White);
+    border: solid 1px var(--NoirsClair);
+    margin-left: 0%;
+    width: 100%;
+}
+
+.form-actions {
+    margin-left: 60%;
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+    align-items: flex-end;
+    width: 30%;
+    height: 10%;
+}
+
+.form-actions button {
+    color: var(--White);
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    color: var(--Noir);
+}
+
+.form-actions .submit {
+    background-color: var(--VERTClair);
+    color: var(--White);
+}
+
+.form-actions .submit:hover {
+    background-color: var(--VERT);
+    color: var(--White);
+}
+
+.form-actions .cancel-btn:hover {
+    background-color: var(--Rouge);
+    color: var(--White);
+}
+
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.close:hover,
+.close:focus {
+    color: black;
+    text-decoration: none;
+}
+
+@keyframes popupAppear {
+    from {
+        transform: translateY(-50px);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
 }

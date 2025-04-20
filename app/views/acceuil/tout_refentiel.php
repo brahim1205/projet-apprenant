@@ -10,7 +10,7 @@ return function ($data) {
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
-    <link rel="stylesheet" href="<?= $urlCss . Chemins::CheminAssetCss->value ."/referentiel.css" ?>">
+    <link rel="stylesheet" href="<?= $urlCss . Chemins::CheminAssetCss->value ."/tout_referentiel.css" ?>">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Référentiels</title>
 
@@ -31,7 +31,7 @@ return function ($data) {
             </div>
 
 
-          <div class="Gril" id="openModal">+ Creer un référentiel</div>
+        <div id="openModalBtn" class="Gril btn-ajouter " >+ Creer un référentiel</div>
             
         </div>
 
@@ -74,37 +74,88 @@ return function ($data) {
 
 
 
-<div class="modal" id="referentielModal">
+<!-- Le bouton pour ouvrir le modal -->
+<div id="openModalBtn" class="btn-ajouter">+ Créer un référentiel</div>
+
+<!-- Le Modal -->
+<div id="referentielModal" class="modal">
     <div class="modal-content">
-        <span class="close" id="closeModal">&times;</span>
-        <h2>Ajouter un référentiel</h2>
-
-        <label>Libellé référentiel</label>
-        <input type="text" value="Cloud & CyberSec" />
-
-        <label>Promotion active</label>
-        <div class="tags">
-            <div class="tag green">DEV WEB/MOBILE <span>×</span></div>
-            <div class="tag blue">REF DIG <span>×</span></div>
-            <div class="tag purple">DEV DATA <span>×</span></div>
-            <div class="tag orange">AWS <span>×</span></div>
-            <div class="tag red">HACKEUSE <span>×</span></div>
+        <div class="cln">
+            
+            <h2>Créer un nouveau référentiel</h2>
+            <span class="close">&times;</span>
         </div>
 
-        <button class="btn-submit">Terminer</button>
+    <form action="/referentiel/ajout" method="post" enctype="multipart/form-data">
+        <label for="photo">Photo du référentiel</label>
+        <div class="photdp">
+            <label for="photo" class="drop-area">
+                <span class="aj">Ajouter </span> ou Glisser
+            </label>
+            <input type="file" id="photo" name="photo" accept="image/*" style="display: none;" required>
+        </div>
+
+        <label>Nom*</label>
+        <input type="text" class="nomref" name="nomReferentiel" placeholder="Nom du référentiel" required>
+
+        <label>Description</label>
+        <textarea name="description" class="textar" placeholder="Description"></textarea>
+
+        <div class="form-row">
+            <div>
+                <label>Capacité*</label>
+                <input type="number" class="capacite" name="capacite" value="30" required>
+            </div>
+            <div >
+                <label>Nombre de sessions*</label>
+                <select class="select" name="nombre_sessions" required>
+                    <option>1 session</option>
+                    <option>2 sessions</option>
+                    <option>3 sessions</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="form-actions">
+            <button type="button" class="cancel-btn">Annuler</button>
+            <button type="submit" class="submit" class="submit-btn">Créer</button>
+        </div>
+    </form>
     </div>
 </div>
 
 <script>
-    const openBtn = document.getElementById("openModal");
-    const modal = document.getElementById("referentielModal");
-    const closeBtn = document.getElementById("closeModal");
+const modal = document.getElementById("referentielModal");
+const openBtn = document.getElementById("openModalBtn");  // ici openModalBtn
+const closeBtn = document.querySelector(".close");
+const cancelBtn = document.querySelector(".cancel-btn");
 
-    openBtn.onclick = () => modal.style.display = "flex";
-    closeBtn.onclick = () => modal.style.display = "none";
-    window.onclick = (e) => {
-        if (e.target === modal) modal.style.display = "none";
-    };
+openBtn.onclick = () => modal.style.display = "block";
+closeBtn.onclick = () => modal.style.display = "none";
+cancelBtn.onclick = () => modal.style.display = "none";
+
+window.onclick = (event) => {
+    if (event.target === modal) modal.style.display = "none";
+};
+
+// Drag & Drop pour l'image
+const dropArea = document.querySelector('.drop-area');
+
+dropArea.addEventListener('dragover', (e) => {
+    e.preventDefault();
+    dropArea.classList.add('dragover');
+});
+
+dropArea.addEventListener('dragleave', () => {
+    dropArea.classList.remove('dragover');
+});
+
+dropArea.addEventListener('drop', (e) => {
+    e.preventDefault();
+    dropArea.classList.remove('dragover');
+    const fileInput = document.getElementById('photo');
+    fileInput.files = e.dataTransfer.files;
+});
 </script>
 </html>
 <?php

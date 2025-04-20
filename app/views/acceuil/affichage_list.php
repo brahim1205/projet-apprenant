@@ -16,27 +16,41 @@ return function ($data) {
 </head>
 <body>
   <div class="sidebar">
-    <div>
-      <h2>Sonatel</h2>
+
+    <div class="logPRO">
+                <div class="log">
+                    <img class="imglo" src="<?= $urlCss.Chemins::CheminAssetImage->value."/logo_odc.png"?>" alt="logo sonatel">
+                </div>
+                <div class="Prom">
+                    <h5>Promotion - 2025</h5>
+                </div>
+      </div>
+      <div class="menu">       
       <ul>
         <li><i class="fas fa-tachometer-alt"></i> Tableau de bord</li>
-        <br><br>
         <li class="active"><i class="fas fa-graduation-cap"></i> Promotions</li>
-        <br>
+    
+      <a href="/referentiels" class="ret">
         <li><i class="fas fa-book"></i> Référentiels</li>
-        <br>
+      </a>
         <li><i class="fas fa-users"></i> Apprenants</li>
-        <br>
+        
         <li><i class="fas fa-calendar-check"></i> Présences</li>
-        <br>
+        
         <li><i class="fas fa-laptop"></i> Kits & Laptops</li>
-        <br>
+   
         <li><i class="fas fa-chart-line"></i> Rapports & Stats</li>
       </ul>
     </div>
-    <button style="padding: 10px; background-color: #ffe6e6; border: none; border-radius: 5px;">
-      <i class="fas fa-sign-out-alt"></i> Déconnexion
-    </button>
+    <!-- <div class="saysay"></div> -->
+
+      <div class="form">
+          <form class="form" action="/logout" method="post">
+              <button type="submit" class="form">
+                  <i class="fa-solid fa-right-from-bracket"></i> Déconnexion
+              </button>
+          </form>
+      </div>
   </div>
 <div class="col">
   <div class="main">

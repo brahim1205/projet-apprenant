@@ -3,8 +3,7 @@ declare(strict_types=1);
 
 use App\Controllers;
 use App\Enums\Fonction\Fonction;
-
-session_start();
+$controller= __DIR__ .Chemins::Controller->value;
 
 $path = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
 
@@ -59,18 +58,31 @@ $routes = [
             $promotionController['affichageListe']();
         }
     },
+'/promotion/ajout' => function() use ($promotionController,$controller) {
+    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+        $params = [
+            'nomPromo' => $_POST['nomPromo'] ?? '',
+            'date_debut' => $_POST['date_debut'] ?? '',
+            'date_fin' => $_POST['date_fin'] ?? '',
+            'referentiel' => $_POST['referentiel'] ?? '',
+            'photo' => $_FILES['photo'] ?? null,
+        ];
+        
+        $erreurs = $promotionController['ajoutPromo'](
+            $params,
+        );
 
-    '/promotion/ajout' => function() use ($promotionController) {
-        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-            $promotionController['ajoutPromo'](
-                $_POST['nomPromo'] ?? '',
-                $_POST['dateDebut'] ?? '',
-                $_POST['dateFin'] ?? '',
-                $_FILES['photoPromo'] ?? [],
-                $_POST['referentiel'] ?? ''
-            );
+        if (!empty($erreurs)) {
+            $_SESSION['old'] = $params;
+            $_SESSION['erreurs'] = $erreurs;
+            $controller['redirection']("promotion#form-popup");
+            exit;
+        } else {
+            $controller['redirection']("promotion");
         }
-    },
+    }
+},
+
 
     '/referentiels' => $referentielController['affichageRef'],
 

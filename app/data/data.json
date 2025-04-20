@@ -6,7 +6,7 @@
             "nom": "wane",
             "matricule": "wane1",
             "gmail": "wane@gmail.com",
-            "password": "beugoumali",
+            "password": "wane123",
             "ref": "dev-web"
         }
     ],
@@ -95,6 +95,14 @@
             "fin": "01\/08\/2010",
             "etat": "inactive",
             "nb_apprenants": 50
+        },
+        {
+            "MatriculePromo": "promo wane",
+            "filiere": "dev-web",
+            "photoPromo": "\/WhatsApp Image 2025-03-18 at 20.54.45.jpeg",
+            "debut": "21\/01\/2025",
+            "fin": "01\/07\/2025",
+            "etat": "inactive"
         }
     ],
     "Referentiels": [
@@ -102,35 +110,35 @@
             "Nom": "Dev-Web",
             "NombresModule": 8,
             "NombresApprenant": 50,
-            "Description": "Contre-indices de synthétique, le référence digital pathique...",
+            "Description": "Contre-indices de synth\u00e9tique, le r\u00e9f\u00e9rence digital pathique...",
             "PhotoRef": "\/WhatsApp Image 2025-03-18 at 20.51.16 (1).jpeg"
         },
         {
             "Nom": "Ref-digital",
             "NombresModule": 8,
             "NombresApprenant": 50,
-            "Description": "Contre-indices de synthétique, le référence digital pathique...",
+            "Description": "Contre-indices de synth\u00e9tique, le r\u00e9f\u00e9rence digital pathique...",
             "PhotoRef": "\/WhatsApp Image 2025-03-18 at 20.51.16 (1).jpeg"
         },
         {
             "Nom": "hackeuse",
             "NombresModule": 8,
             "NombresApprenant": 50,
-            "Description": "Contre-indices de synthétique, le référence digital pathique...",
+            "Description": "Contre-indices de synth\u00e9tique, le r\u00e9f\u00e9rence digital pathique...",
             "PhotoRef": "\/WhatsApp Image 2025-03-18 at 20.51.16 (1).jpeg"
         },
         {
             "Nom": "dev-data",
             "NombresModule": 8,
             "NombresApprenant": 50,
-            "Description": "Contre-indices de synthétique, le référence digital pathique...",
+            "Description": "Contre-indices de synth\u00e9tique, le r\u00e9f\u00e9rence digital pathique...",
             "PhotoRef": "\/WhatsApp Image 2025-03-18 at 20.51.16 (1).jpeg"
         },
         {
             "Nom": "Dev-Web",
             "NombresModule": 8,
             "NombresApprenant": 50,
-            "Description": "Contre-indices de synthétique, le référence digital pathique...",
+            "Description": "Contre-indices de synth\u00e9tique, le r\u00e9f\u00e9rence digital pathique...",
             "PhotoRef": "\/WhatsApp Image 2025-03-18 at 20.51.16 (1).jpeg"
         }
     ]

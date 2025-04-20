@@ -14,32 +14,39 @@ function redirectionPromo(string $path): void {
     exit;
 }
 
-function ajoutPromo(array $params, array $validator, array $servicePromo): void {
+function ajoutPromo(array $params, array $validator, array $servicePromo): array {
     $donnee = include __DIR__ . Chemins::Model->value;
     $database = &$donnee['database'];
     $databaseFile = $donnee['databaseFile'];
 
-    session_start();
-
-
     $nomPromo = $params['nomPromo'] ?? '';
-    $dateDebut = $params['dateDebut'] ?? '';
-    $dateFin = $params['dateFin'] ?? '';
+    $dateDebut = $params['date_debut'] ?? '';
+    $dateFin = $params['date_fin'] ?? '';
     $referentiel = $params['referentiel'] ?? '';
-    $photoPromo = $params['photoPromo'] ?? null;
+    $photoPromo = $_FILES['photo'] ?? null;
 
-    $erreurs = [
-        (empty($referentiel) || empty($nomPromo) || empty($dateDebut) || empty($dateFin) || empty($photoPromo['name'])) => Textes::TLO->value,
-        (!$validator['date_Valide']($dateDebut) || !$validator['date_Valide']($dateFin)) => "Date invalide",
-        (!$servicePromo['unicite']($database, $nomPromo)) => Textes::PromoExiste->value,
-    ];
+    $erreurs = [];
 
-    array_walk($erreurs, function($message, $condition) {
-        if ($condition) {
-            $_SESSION['message'] = $message;
-            redirectionPromo("promotion#form-popup");
+    if (empty($referentiel) || empty($nomPromo) || empty($dateDebut) || empty($dateFin) || empty($photoPromo['name'])) {
+        $erreurs[] = Textes::TLO->value;
+    }
+
+    if (!$validator['date_Valide']($dateDebut) || !$validator['date_Valide']($dateFin)) {
+        $erreurs[] = "Date invalide";
+    } else {
+        if (!$validator['dateDebut_Inferieur_DateFin']($dateDebut, $dateFin)) {
+            $erreurs[] = "La date de début doit être inférieure ou égale à la date de fin.";
         }
-    });
+    }
+
+    if (!$servicePromo['unicite']($database, $nomPromo)) {
+        $erreurs[] = Textes::PromoExiste->value;
+    }
+
+    if (!empty($erreurs)) {
+        
+        return $erreurs;
+    }
 
     $rootPath = dirname(__DIR__, 2);
     $uploadDir = $rootPath . '/public' . Chemins::CheminAssetImage->value;
@@ -55,9 +62,15 @@ function ajoutPromo(array $params, array $validator, array $servicePromo): void 
     if ($servicePromo['ajouterPromo']($database, $nomPromo, $dateDebut, $dateFin, $referentiel, $photoPromoPath)) {
         file_put_contents($databaseFile, json_encode($database, JSON_PRETTY_PRINT));
         $_SESSION['message'] = Textes::AjoutSuccess->value;
-        redirectionPromo("promotion");
+        return [];
     }
+
+    return ["Erreur lors de l'ajout dans la base de données"];
 }
+
+
+
+
 function affichageAllPromo(array $servicePromo): void {
     $donnee = include __DIR__ . Chemins::Model->value;
     $database = $donnee['database'];
@@ -138,15 +151,15 @@ function affichageListe(array $servicePromo){
 
     $infoPromo = $servicePromo['afficherAllPromo']($database);
     $promotions = array_filter($infoPromo, function($promo) {
-        return 
+        return
             isset($promo['MatriculePromo'], $promo['filiere'], $promo['photoPromo'], $promo['debut'], $promo['fin']) &&
             !empty($promo['MatriculePromo']) && !empty($promo['filiere']) && !empty($promo['photoPromo']) && !empty($promo['debut']) && !empty($promo['fin']);
     });
 
 
-    $promotions = array_values($promotions); 
+    $promotions = array_values($promotions);
 
-    $page = isset($_GET['page']) ? (int)$_GET['page'] : 1; 
+    $page = isset($_GET['page']) ? (int)$_GET['page'] : 1;
     $perPage = isset($_GET['perPage']) ? (int)$_GET['perPage'] : 6;
 
     $totalPromotions = count($promotions);
@@ -165,11 +178,11 @@ function affichageListe(array $servicePromo){
         'totalPages' => $totalPages,
         'pageActuelle' => $page,
     ];
-   
+
     
 
     $ListePromotion = include __DIR__ . Chemins::PromotionListe->value;
-   
+
 
     echo  $ListePromotion($data);
 }
@@ -184,7 +197,7 @@ $ListePromotion = include __DIR__ . Chemins::PromotionListe->value;
 
 return [
     Fonction::ajoutPromo->value => function(array $params) use ($validator, $servicePromo) {
-        ajoutPromo($params, $validator, $servicePromo);
+        return ajoutPromo($params, $validator, $servicePromo);
     },
     Fonction::afficherAllPromos->value => function() use ($servicePromo) {
 
@@ -197,10 +210,10 @@ return [
     },
 
     Fonction::trouverPromoGrille->value => function($nomPromo) use ($servicePromo,$grillePromotion) {
-       return trouverPromo($nomPromo, $servicePromo, $grillePromotion);
+        return trouverPromo($nomPromo, $servicePromo, $grillePromotion);
     },
 
     Fonction::trouverPromoListe->value => function($nomPromo) use ($servicePromo,$ListePromotion) {
         return trouverPromo($nomPromo, $servicePromo, $ListePromotion);
-     }
+    },
 ];

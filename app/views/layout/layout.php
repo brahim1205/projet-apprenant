@@ -1,15 +1,4 @@
-<?php
-use App\MESS\Enums\Textes;
-if (!isset($_SESSION['user'])) {
-    header("Location: /login");
-    exit();
-}
-?>
-
 <?php 
-return function($contenu){
-    ob_start();
-    
 
     $path = "http://" . $_SERVER["HTTP_HOST"];
     $currentPath = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH); 
@@ -21,6 +10,8 @@ return function($contenu){
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="<?= $path .Chemins::CheminAssetCss->value."/layout.css"?>">
+    <link rel="stylesheet" href="<?= 'http://' . $_SERVER["HTTP_HOST"] . Chemins::CheminAssetCss->value . "/referentiel.css" ?>">
+
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <title>Document</title>
 
@@ -100,7 +91,8 @@ return function($contenu){
                     <div class="cloche"><i class="fa-regular fa-bell"></i></div>
                     <div class="icPrenom">A</div>
                     <div class="loginfo">
-                    <?= htmlspecialchars($_SESSION['user']['id'] ?? 'Non connecté') ?>                        <div class="Admi">Administrateur</div>
+                        <div class="mail">admin@sonatel-academy.sn</div>
+                        <div class="Admi">Administrateur</div>
                     </div>
                 </div>
             </div>
@@ -113,7 +105,4 @@ return function($contenu){
 
 </html>
 
-<?php 
- return ob_get_clean();
-};
-?>
+

@@ -7,9 +7,13 @@ enum Chemins: string {
     case ChangePass = '/../views/login/mdpOublie.html.php';
 
     case Layout = '/../views/layout/base.layout.php';
+    case Layout1 = '/../views/layout/layout.php';
+
     case Promotion = '/../views/acceuil/promo.php';
     case PromotionListe= '/../views/acceuil/affichage_list.php';
     case Referentiel = '/../views/acceuil/referentiels.php';
+
+    case Tous_referentiel = '/../views/acceuil/tout_refentiel.php';
     case Logout = '/../views/login/logout.php';
     case Model     = '/../models/model.php';
     case Service  =  '/../models/connexion.model.php';

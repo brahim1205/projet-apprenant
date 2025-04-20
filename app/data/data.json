@@ -1,46 +1,40 @@
 {
-    "Admin": [
-        {
-            "role": "admin",
-            "prenom": "coach",
-            "nom": "wane",
-            "matricule": "wane1",
-            "gmail": "wane@gmail.com",
-            "password": "wane123",
-            "ref": "dev-web"
-        }
-    ],
-    "Apprenant": [
-        {
-            "role": "apprenant",
-            "prenom": "khouss",
-            "nom": "ngom",
-            "matricule": "khoussngom",
-            "gmail": "khoussn@gmail.com",
-            "password": "marakhib",
-            "ref": "dev-web",
-            "promo": "promotion 2025"
-        }
-    ],
-    "Vigile": [
-        {
-            "role": "vigile",
-            "prenom": "modou",
-            "nom": "ndiaye",
-            "matricule": "modoundiaye",
-            "gmail": "modou@gmail.com",
-            "password": "modouvigile"
-        }
-    ],
-    "Promotion": [
-        {
+    "Admin": [{
+        "role": "admin",
+        "prenom": "coach",
+        "nom": "wane",
+        "matricule": "wane1",
+        "gmail": "wane@gmail.com",
+        "password": "wane123",
+        "ref": "dev-web"
+    }],
+    "Apprenant": [{
+        "role": "apprenant",
+        "prenom": "khouss",
+        "nom": "ngom",
+        "matricule": "khoussngom",
+        "gmail": "khoussn@gmail.com",
+        "password": "marakhib",
+        "ref": "dev-web",
+        "promo": "promotion 2025"
+    }],
+    "Vigile": [{
+        "role": "vigile",
+        "prenom": "modou",
+        "nom": "ndiaye",
+        "matricule": "modoundiaye",
+        "gmail": "modou@gmail.com",
+        "password": "modouvigile"
+    }],
+    "Promotion": [{
             "MatriculePromo": "promotion 2025",
             "filiere": "hackeuse",
             "photoPromo": "\/WhatsApp Image 2025-03-18 at 20.51.16 (2).jpeg",
             "debut": "2025-02-06",
             "fin": "2025-11-17",
             "etat": "inactive",
-            "nb_apprenants": 156
+            "nb_apprenants": 156,
+            "referentiels": ["dev-web", "hackeuse"]
         },
         {
             "MatriculePromo": "Promo 2020",
@@ -49,7 +43,8 @@
             "debut": "2020-02-17",
             "fin": "2020-11-17",
             "etat": "inactive",
-            "nb_apprenants": 120
+            "nb_apprenants": 120,
+            "referentiels": ["dev-web", "ref-digital", "hackeuse"]
         },
         {
             "MatriculePromo": "Promo 2019",
@@ -58,7 +53,8 @@
             "debut": "2019-01-17",
             "fin": "2019-11-17",
             "etat": "inactive",
-            "nb_apprenants": 162
+            "nb_apprenants": 162,
+            "referentiels": ["dev-web"]
         },
         {
             "MatriculePromo": "2021",
@@ -67,7 +63,8 @@
             "debut": "2021-01-17",
             "fin": "2025-04-25",
             "etat": "inactive",
-            "nb_apprenants": 90
+            "nb_apprenants": 90,
+            "referentiels": ["dev-web"]
         },
         {
             "MatriculePromo": "Promotion 2019",
@@ -76,7 +73,8 @@
             "debut": "21\/02\/2019",
             "fin": "11\/08\/2019",
             "etat": "inactive",
-            "nb_apprenants": 190
+            "nb_apprenants": 190,
+            "referentiels": ["dev-web"]
         },
         {
             "MatriculePromo": "promo 2023",
@@ -85,7 +83,8 @@
             "debut": "21\/04\/2023",
             "fin": "09\/10\/2023",
             "etat": "inactive",
-            "nb_apprenants": 125
+            "nb_apprenants": 125,
+            "referentiels": ["dev-web"]
         },
         {
             "MatriculePromo": "promo 2010",
@@ -94,7 +93,8 @@
             "debut": "01\/01\/2010",
             "fin": "01\/08\/2010",
             "etat": "inactive",
-            "nb_apprenants": 50
+            "nb_apprenants": 50,
+            "referentiels": ["dev-web"]
         },
         {
             "MatriculePromo": "promo wane",
@@ -102,11 +102,11 @@
             "photoPromo": "\/WhatsApp Image 2025-03-18 at 20.54.45.jpeg",
             "debut": "21\/01\/2025",
             "fin": "01\/07\/2025",
-            "etat": "inactive"
+            "etat": "inactive",
+            "referentiels": ["dev-web"]
         }
     ],
-    "Referentiels": [
-        {
+    "Referentiels": [{
             "Nom": "Dev-Web",
             "NombresModule": 8,
             "NombresApprenant": 50,

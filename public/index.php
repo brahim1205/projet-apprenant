@@ -6,4 +6,4 @@ session_start();
 define('BASE_URL', 'http://'.$_SERVER['HTTP_HOST']);
 
 
-require __DIR__ . Chemins::Routes->value;
+require_once __DIR__ . Chemins::Routes->value;

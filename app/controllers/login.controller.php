@@ -1,6 +1,6 @@
 <?php
 declare(strict_types=1);
-namespace App\Controllers;
+namespace App\Controllers\login;
 use App\Enums\Fonction\Fonction;
 require_once __DIR__ ."/../enums/Textes.php";
 $controller=require __DIR__ . "/controller.php";

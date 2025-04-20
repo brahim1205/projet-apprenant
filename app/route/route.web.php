@@ -86,6 +86,8 @@ $routes = [
 
     '/referentiels' => $referentielController['affichageRef'],
 
+    '/Tout_referentiels' => $referentielController['affichageToutRef'],
+
     '/referentiels/ajout' => function() use ($referentielController) {
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $referentielController['ajoutReferentiel'](

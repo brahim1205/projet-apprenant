@@ -29,13 +29,9 @@ return function ($data) {
                     <input class="search1" type="text" name="recherche" placeholder="Rechercher un referentiel">
                 </form>
             </div>
-<a href="/Tout_referentiels" class="filtre1"> 
-                <div class="icNite"><i class="fa-solid fa-book"></i></div>
-                <div class="ai">Tous les réferentiels</div>
-                
-            
-</a>
-          <div class="Gril" id="openModal">+ Ajouter à la promotion</div>
+
+
+          <div class="Gril" id="openModal">+ Creer un référentiel</div>
             
         </div>
 

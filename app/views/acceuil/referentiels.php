@@ -42,9 +42,8 @@ return function ($data) {
         <div class="separateur"></div>
 
         <div class="liste-refs">
-            <?php if(isset($data)): ?>
-                
-                <?php foreach ($data as $datas): ?>
+        <?php if(isset($data['referentiels_actifs'])): ?>
+            <?php foreach ($data['referentiels_actifs'] as $datas): ?>
 
                     <div class="item-ref">
                         <div class="containImage"><img src="<?= Chemins::CheminAssetImage->value . '/' . ($datas['PhotoRef'] ?? 'logo_odc.png') ?>" alt=""></div>
@@ -84,20 +83,28 @@ return function ($data) {
         <h2>Ajouter un référentiel</h2>
 
         <label>Libellé référentiel</label>
-        <input type="text" value="Cloud & CyberSec" />
+        <input type="text" placeholder="Nom du référentiel..." />
 
         <label>Promotion active</label>
         <div class="tags">
-            <div class="tag green">DEV WEB/MOBILE <span>×</span></div>
-            <div class="tag blue">REF DIG <span>×</span></div>
-            <div class="tag purple">DEV DATA <span>×</span></div>
-            <div class="tag orange">AWS <span>×</span></div>
-            <div class="tag red">HACKEUSE <span>×</span></div>
-        </div>
+    <?php if (isset($data['referentiels'])): ?>
+        <?php foreach ($data['referentiels'] as $ref): ?>
+            <div 
+                class="tag" 
+                style="background-color: <?= htmlspecialchars($ref['Couleur']) ?>;"
+                data-id="<?= htmlspecialchars($ref['Nom']) ?>"
+            >
+                <?= htmlspecialchars($ref['Nom']) ?> <span>×</span>
+            </div>
+        <?php endforeach; ?>
+    <?php endif; ?>
+</div>
+
 
         <button class="btn-submit">Terminer</button>
     </div>
 </div>
+
 
 <script>
     const openBtn = document.getElementById("openModal");

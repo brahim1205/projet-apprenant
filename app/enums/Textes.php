@@ -31,6 +31,9 @@ enum Textes: string {
     case Changer= 'Changer';
 
 
+    case AjoutError = 'Echec d\'enregistrement';
+
+
 
 }
 

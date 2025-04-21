@@ -74,10 +74,8 @@ return function ($data) {
 
 
 
-<!-- Le bouton pour ouvrir le modal -->
 <div id="openModalBtn" class="btn-ajouter">+ Créer un référentiel</div>
 
-<!-- Le Modal -->
 <div id="referentielModal" class="modal">
     <div class="modal-content">
         <div class="cln">
@@ -109,9 +107,9 @@ return function ($data) {
             <div >
                 <label>Nombre de sessions*</label>
                 <select class="select" name="nombre_sessions" required>
-                    <option>1 session</option>
-                    <option>2 sessions</option>
-                    <option>3 sessions</option>
+                    <option>1</option>
+                    <option>2</option>
+                    <option>3</option>
                 </select>
             </div>
         </div>
@@ -126,7 +124,7 @@ return function ($data) {
 
 <script>
 const modal = document.getElementById("referentielModal");
-const openBtn = document.getElementById("openModalBtn");  // ici openModalBtn
+const openBtn = document.getElementById("openModalBtn");  
 const closeBtn = document.querySelector(".close");
 const cancelBtn = document.querySelector(".cancel-btn");
 
@@ -138,7 +136,6 @@ window.onclick = (event) => {
     if (event.target === modal) modal.style.display = "none";
 };
 
-// Drag & Drop pour l'image
 const dropArea = document.querySelector('.drop-area');
 
 dropArea.addEventListener('dragover', (e) => {

@@ -166,11 +166,11 @@
             "statut": "inactive"
         },
         {
-            "Nom": "Dev-Web",
-            "NombresModule": 8,
-            "NombresApprenant": 50,
-            "Description": "Contre-indices de synth\u00e9tique, le r\u00e9f\u00e9rence digital pathique...",
-            "PhotoRef": "\/WhatsApp Image 2025-03-18 at 20.51.16 (1).jpeg",
+            "Nom": "AWS",
+            "NombresModule": 3,
+            "Description": "server & cloud",
+            "NombresApprenant": 30,
+            "photoRef": "\/assets\/images\/WhatsApp Image 2025-03-18 at 20.54.41 (1).jpeg",
             "statut": "inactive"
         }
     ]

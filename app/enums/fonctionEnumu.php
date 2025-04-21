@@ -40,5 +40,6 @@ enum Fonction: string{
     case RecupereStatut ="recupereStatut";
     case DesactiveTout = "desactiverTout";
     case ActivePromo = "activePromo";
+    case AfficherRefActive= "afficherRefActive";
 
 }

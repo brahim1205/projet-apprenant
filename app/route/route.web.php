@@ -1,9 +1,11 @@
 <?php
+
 declare(strict_types=1);
 
 use App\Controllers;
 use App\Enums\Fonction\Fonction;
-$controller= __DIR__ .Chemins::Controller->value;
+
+$controller = __DIR__ . Chemins::Controller->value;
 
 $path = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
 
@@ -41,7 +43,7 @@ $referentielController = require __DIR__ . Chemins::RefController->value;
 $authController = require __DIR__ . Chemins::Controller->value;
 
 $routes = [
-    '/promotion' => function() use ($promotionController) {
+    '/promotion' => function () use ($promotionController) {
         $recherche = $_GET['recherche'] ?? '';
         if (!empty($recherche)) {
             $promotionController['trouverPromoGrille']($recherche);
@@ -50,7 +52,7 @@ $routes = [
         }
     },
 
-    '/promotion/active' => function() use ($promotionController) {
+    '/promotion/active' => function () use ($promotionController) {
 
         $nomPromo = $_GET['matriculePromo'] ?? null;
 
@@ -62,7 +64,7 @@ $routes = [
         }
     },
 
-    '/promotion/liste' => function() use ($promotionController) {
+    '/promotion/liste' => function () use ($promotionController) {
         $recherche = $_GET['recherche'] ?? '';
         if (!empty($recherche)) {
             $promotionController['trouverPromoListe']($recherche);
@@ -70,45 +72,56 @@ $routes = [
             $promotionController['affichageListe']();
         }
     },
-'/promotion/ajout' => function() use ($promotionController,$controller) {
-    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-        $params = [
-            'nomPromo' => $_POST['nomPromo'] ?? '',
-            'date_debut' => $_POST['date_debut'] ?? '',
-            'date_fin' => $_POST['date_fin'] ?? '',
-            'referentiel' => $_POST['referentiel'] ?? '',
-            'photo' => $_FILES['photo'] ?? null,
-        ];
-        
-        $erreurs = $promotionController['ajoutPromo'](
-            $params,
-        );
+    '/promotion/ajout' => function () use ($promotionController, $controller) {
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            $params = [
+                'nomPromo' => $_POST['nomPromo'] ?? '',
+                'date_debut' => $_POST['date_debut'] ?? '',
+                'date_fin' => $_POST['date_fin'] ?? '',
+                'referentiel' => $_POST['referentiel'] ?? '',
+                'photo' => $_FILES['photo'] ?? null,
+            ];
 
-        if (!empty($erreurs)) {
-            $_SESSION['old'] = $params;
-            $_SESSION['erreurs'] = $erreurs;
-            $controller['redirection']("promotion#form-popup");
-            exit;
-        } else {
-            $controller['redirection']("promotion");
+            $erreurs = $promotionController['ajoutPromo'](
+                $params,
+            );
+
+            if (!empty($erreurs)) {
+                $_SESSION['old'] = $params;
+                $_SESSION['erreurs'] = $erreurs;
+                $controller['redirection']("promotion#form-popup");
+                exit;
+            } else {
+                $controller['redirection']("promotion");
+            }
         }
-    }
-},
+    },
+
+
+
 
 
     '/referentiels' => $referentielController['affichageRef'],
 
     '/Tout_referentiels' => $referentielController['affichageToutRef'],
 
-    '/referentiels/ajout' => function() use ($referentielController) {
-        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-            $referentielController['ajoutReferentiel'](
-                $_POST['nomReferentiel'] ?? '',
-                $_POST['description'] ?? '',
-                $_FILES['photoReferentiel'] ?? []
-            );
-        }
-    },
+
+'/referentiel/ajout' => function () use ($referentielController) {
+    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+        $params = [
+            'nomRef' => $_POST['nomReferentiel'] ?? '',
+            'description' => $_POST['description'] ?? '',
+            'nbrApprenant' => (int)($_POST['capacite'] ?? 0),
+            'nbrModule' => (int)str_replace(' session', '', $_POST['nombre_sessions']) ?? 0,
+            'photo' => $_FILES['photo'] ?? null,
+        ];
+
+    
+        $referentielController[Fonction::ajouterRef->value]($params);
+    }
+},
+
+
 ];
 
 if (isset($routes[$path])) {
@@ -116,5 +129,5 @@ if (isset($routes[$path])) {
     $handler();
 } else {
     http_response_code(404);
-    include __DIR__ .Chemins::Erreur404->value;
+    include __DIR__ . Chemins::Erreur404->value;
 }

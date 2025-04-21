@@ -116,7 +116,6 @@
     height: 100%;
     width: 100%;
     margin-top: -15px;
-    /* border: solid 1px var(--Orange); */
 }
 
 input[name="recherche"] {
@@ -132,8 +131,6 @@ input[name="recherche"] {
 .search12 form {
     width: 100%;
     height: 95%;
-    /* background-color: var(--White); */
-    /* margin-top: -3px; */
 }
 
 .Cherche input[type="text"] {
@@ -221,13 +218,14 @@ input[name="recherche"] {
 .liste-refs {
     display: flex;
     flex-direction: row;
-    height: 45%;
+    height: 50%;
     width: 96%;
     gap: 20px;
 }
 
 .item-ref {
     height: 100%;
+    width: 280px;
     padding: 15px;
     border-radius: 15px;
     background-color: var(--White);

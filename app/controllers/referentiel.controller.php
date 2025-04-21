@@ -9,68 +9,100 @@
     $controller=require __DIR__ . "/controller.php";
     $modelRef = $controller[Fonction::Inclusion->value](Chemins::ServiceRef->value);
 
-    function ajoutdescription(array $params, array $modelRef,$controller)
+    function ajouterRef($params, $controller)
     {
-        $donnee = include __DIR__ . Chemins::Model->value;
-        $database = &$donnee['database'];
+
+        $donnee = $controller[Fonction::Inclusion->value](Chemins::Model->value);
+        $database = $donnee['database'];
         $databaseFile = $donnee['databaseFile'];
-        $nomRef = $params['nomRef'] ?? '';
-        $description = $params['description'] ?? '';
-        $photoref = $_FILES['photo'] ?? null;
-        $nbrModule = (int)$params['nbrModule'] ?? 0;
-        $nbrApprenant = (int)$params['nbrApprenant'] ??0;
-    
+
+        $modelRef = require __DIR__ . Chemins::ServiceRef->value;
         $erreurs = [];
     
-        if (empty($description) || empty($nomRef) || empty($nbrApprenant) || empty($nbrModule) || empty($photoref['name'])) {
+
+        if (empty($params['nomRef']) || empty($params['description']) || empty($params['nbrApprenant']) || empty($params['nbrModule']) || empty($params['photo']['name'])) {
             $erreurs[] = Textes::TLO->value;
         }
     
-    
-        if (!$modelRef['unicite']($database, $nomRef)) {
+
+        if (!$modelRef['unicite']($database, $params['nomRef'])) {
             $erreurs[] = Textes::PromoExiste->value;
         }
     
+
         if (!empty($erreurs)) {
-            
-            return $erreurs;
+            $_SESSION['old'] = $params;
+            $_SESSION['erreurs'] = $erreurs;
+            $controller['redirection']('referentiels#referentielModal'); 
+        } else {
+    
+            $photorefPath = $controller[Fonction::SavePhoto->value]($params['photo']);
+    
+            if ($modelRef['ajouterRef']($database, nomModule:$params['nomRef'],nbrApr:$params['nbrApprenant'], nbrModule:$params['nbrModule'], desRef:$params['description'], photoRef:$photorefPath)) {
+                $controller[Fonction::FPC->value]($databaseFile, $database);
+                $controller[Fonction::Redirection->value]('referentiels'); 
+            } else {
+                $_SESSION['message'] = Textes::AjoutError->value;
+                $controller['redirection']('referentiels#referentielModal'); 
+            }
         }
-    
-        $photorefPath= $controller[Fonction::SavePhoto->value]($photoref);
-    
-        if ($modelRef['ajouterPromo']($database, $nomRef, $nbrApprenant, $nbrModule, $description, $photorefPath)) {
-            $controller[Fonction::FPC->value]($databaseFile, $database);
-            $_SESSION['message'] = Textes::AjoutSuccess->value;
-            return [];
-        }
-    
-        return ["Erreur lors de l'ajout dans la base de données"];
     }
-    function affichageRef(): void
+    
+    
+    
+    function affichageRef($controller): void
     {
-        $donnee = include __DIR__ . Chemins::Model->value;
+        $donnee = $controller[Fonction::Inclusion->value](Chemins::Model->value);
+        $database = $donnee['database'];
+    
+        $serviceRef = $controller[Fonction::Inclusion->value](Chemins::ServiceRef->value);
+        $infoRef = $serviceRef[Fonction::AfficherRefActive->value]($database);
+    
+        $tousReferentiels = $database['Referentiels'];
+    
+        $referentielsRestants = array_filter($tousReferentiels, function($ref) use ($infoRef) {
+            return !in_array($ref['Nom'], array_column($infoRef, 'Nom'));
+        });
+
+        $couleurs = [
+            '#A8E6CF',
+            '#DCE775',
+            '#B3E5FC',
+            '#D1C4E9',
+            '#FFCC80',
+            '#FF8A80',
+            '#F8BBD0',
+            '#FFF59D',
+            '#80DEEA',
+            '#B2DFDB',
+        ];
+    
+        $referentielsRestants = array_map(function($ref) use ($couleurs) {
+            $ref['Couleur'] = $couleurs[array_rand($couleurs)];
+            return $ref;
+        }, $referentielsRestants);
+    
+        $ref = $controller[Fonction::Inclusion->value](Chemins::Referentiel->value);
+        $layout = $controller[Fonction::Inclusion->value](Chemins::Layout->value);
+    
+        echo $layout($ref([
+            'referentiels' => array_values($referentielsRestants),
+            'referentiels_actifs' => $infoRef
+        ]));
+    }
+    
+
+    function affichageToutRef($controller): void
+    {
+
+        $donnee = $controller[Fonction::Inclusion->value](Chemins::Model->value);
         $database = $donnee['database'];
 
-        $serviceRef = include __DIR__ . Chemins::ServiceRef->value;
+        $serviceRef = $controller[Fonction::Inclusion->value](Chemins::ServiceRef->value);
         $infoRef = $serviceRef['afficherAllRef']($database);
 
-        $ref = include __DIR__ . Chemins::Referentiel->value;
-        $layout = include __DIR__ . Chemins::Layout->value;
-
-        echo $layout($ref($infoRef));
-    }
-
-    function affichageToutRef(): void
-    {
-
-        $donnee = include __DIR__ . Chemins::Model->value;
-        $database = $donnee['database'];
-
-        $serviceRef = include __DIR__ . Chemins::ServiceRef->value;
-        $infoRef = $serviceRef['afficherAllRef']($database);
-
-        $ref = include __DIR__ . Chemins::Tous_referentiel->value;
-        $layout = include __DIR__ . Chemins::Layout->value;
+        $ref = $controller[Fonction::Inclusion->value](Chemins::Tous_referentiel->value);
+        $layout = $controller[Fonction::Inclusion->value](Chemins::Layout->value);
 
         echo $layout($ref($infoRef));
     
@@ -78,6 +110,13 @@
     }
 
     return [
-        Fonction::AffichageRef->value => 'App\Controllersdescription\affichageRef',
-        Fonction::AffichageToutRef->value  => 'App\Controllersdescription\affichageToutRef',
+        Fonction::AffichageRef->value => function() use ($controller) {
+            affichageRef($controller);
+        },
+        Fonction::AffichageToutRef->value  => function() use ($controller) {
+            affichageToutRef($controller);
+        },
+        Fonction::ajouterRef->value  => function($params) use ($controller) {
+            ajouterRef($params, $controller);
+        },
     ];

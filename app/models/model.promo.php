@@ -12,17 +12,18 @@ return [
         });
         return $unique;
     },
-    Fonction::ajouterPromo->value => function(array &$database, string $nomPromo, string $dateDebut, string $dateFin, string $referentiel, $photoPromo) {
-        $database['Promotion'][] = [
-            'MatriculePromo' => $nomPromo,
-            'filiere' => $referentiel,
-            'photoPromo' => $photoPromo,
-            'debut' => $dateDebut,
-            'fin' => $dateFin,
-            "etat"=>"inactive"
+    Fonction::ajouterRef->value => function(array &$database, string $nomRef, int $nbrApprenant, int $nbrModule, string $desRef, $photoRef) {
+        $database['Referentiels'][] = [
+            'Nom' => $nomRef,
+            'NombresModule' => $nbrModule,
+            'Description' => $desRef,
+            'NombresApprenant' => $nbrApprenant,
+            'photoRef' => $photoRef,
+            'statut' => 'inactive'
         ];
         return true;
     },
+    
     Fonction::afficherAllPromos->value => fn($database) => $database['Promotion'],
 
     Fonction::chercherPromo->value => function($database, $nomPromo) {
@@ -62,14 +63,7 @@ return [
         return count($appr);
     },
     
-    Fonction::RecupereStatut->value => function(array $database) {
-        
-        $promotionsActives = array_filter($database['Promotion'], function($promo) {
-            return isset($promo['etat']) && $promo['etat'] === 'active';
-        });
 
-        return $promotionsActives;
-    },
     
     Fonction::DesactiveTout->value => function(array &$database): bool {
         $desactive = false;

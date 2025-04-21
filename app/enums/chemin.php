@@ -33,7 +33,7 @@ enum Chemins: string {
     case DataJson = './../data/data.json';
     case CheminAssetCss = '/assets/css';
     case CheminAssetImage ='/assets/images';
-
+    
 }
 
 ?>

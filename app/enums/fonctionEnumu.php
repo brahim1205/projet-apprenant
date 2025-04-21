@@ -35,5 +35,7 @@ enum Fonction: string{
     case GetSession = "getSession";
     case UnsetSession = "unsetSession";
     case DestroySession = "destroySession";
+    case FPC = "filePutContents";
+    case FGC = "fileGetContents";
 
 }

@@ -68,11 +68,9 @@ function changerPassword(array $params, array &$donnee, array $con,$controller):
     }
 
     if ($con["changerPassword"]($email, $newPassword, $donnee["database"])) {
-        $_SESSION['message'] = Textes::ChangePassSUC->value;
-        file_put_contents(
-            $donnee["databaseFile"],
-            json_encode($donnee["database"], JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE)
-        );
+        $_SESSION['messageSuccess'] = Textes::ChangePassSUC->value;
+        $controller[Fonction::FPC->value]($donnee['databaseFile'], $donnee['database']);
+
         $controller[Fonction::Redirection->value]("login");
     } else {
         $_SESSION['error'] = Textes::ChangePassEr->value;;

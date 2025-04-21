@@ -49,7 +49,7 @@ function ajoutPromo(array $params, array $validator, array $servicePromo,$contro
     $photoPromoPath= $controller[Fonction::SavePhoto->value]($photoPromo);
 
     if ($servicePromo['ajouterPromo']($database, $nomPromo, $dateDebut, $dateFin, $referentiel, $photoPromoPath)) {
-        file_put_contents($databaseFile, json_encode($database, JSON_PRETTY_PRINT));
+        $controller[Fonction::FPC->value]($databaseFile, $database);
         $_SESSION['message'] = Textes::AjoutSuccess->value;
         return [];
     }
@@ -107,7 +107,7 @@ function trouverPromo($nomPromo, $servicePromo,$mode,$controller) {
     $promoCherchee = $servicePromo['chercherPromo'](database: $database, nomPromo: $nomPromo);
 
     if ($promoCherchee) {
-       
+    
         if (!isset($promoCherchee[0])) {
             $promoCherchee = [$promoCherchee];
         }

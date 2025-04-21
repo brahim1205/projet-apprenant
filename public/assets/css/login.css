@@ -122,6 +122,22 @@ img {
     border-radius: 5px 5px 5px 5px;
     font-family: Arial, Helvetica, sans-serif;
     font-weight: bold;
+    color: var(--blanc);
+}
+
+.alertSuccess {
+    background-color: var(--vert);
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 10%;
+    width: 80%;
+    padding-left: 10px;
+    border-radius: 5px 5px 5px 5px;
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: bold;
+    color: var(--blanc);
 }
 
 .seConnecter {

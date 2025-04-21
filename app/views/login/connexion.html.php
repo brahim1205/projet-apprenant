@@ -28,6 +28,10 @@ use App\MESS\Enums\Textes;
         <?php if(!empty($_SESSION['message'])): ?>
             <div class="alert"><?= $_SESSION['message'] ?></div>
         <?php endif; ?>
+        <?php if(!empty($_SESSION['messageSuccess'])): ?>
+            <div class="alertSuccess"><?= $_SESSION['messageSuccess'] ?></div>
+        <?php endif; ?>
+
         <?php unset($_SESSION['message']); ?>
 
             <form action="/login" method="post">

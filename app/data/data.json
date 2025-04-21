@@ -1,32 +1,39 @@
 {
-    "Admin": [{
-        "role": "admin",
-        "prenom": "coach",
-        "nom": "wane",
-        "matricule": "wane1",
-        "gmail": "wane@gmail.com",
-        "password": "wane123",
-        "ref": "dev-web"
-    }],
-    "Apprenant": [{
-        "role": "apprenant",
-        "prenom": "khouss",
-        "nom": "ngom",
-        "matricule": "khoussngom",
-        "gmail": "khoussn@gmail.com",
-        "password": "marakhib",
-        "ref": "dev-web",
-        "promo": "promotion 2025"
-    }],
-    "Vigile": [{
-        "role": "vigile",
-        "prenom": "modou",
-        "nom": "ndiaye",
-        "matricule": "modoundiaye",
-        "gmail": "modou@gmail.com",
-        "password": "modouvigile"
-    }],
-    "Promotion": [{
+    "Admin": [
+        {
+            "role": "admin",
+            "prenom": "coach",
+            "nom": "wane",
+            "matricule": "wane1",
+            "gmail": "wane@gmail.com",
+            "password": "wane123",
+            "ref": "dev-web"
+        }
+    ],
+    "Apprenant": [
+        {
+            "role": "apprenant",
+            "prenom": "khouss",
+            "nom": "ngom",
+            "matricule": "khoussngom",
+            "gmail": "khoussn@gmail.com",
+            "password": "marakhib",
+            "ref": "dev-web",
+            "promo": "promotion 2025"
+        }
+    ],
+    "Vigile": [
+        {
+            "role": "vigile",
+            "prenom": "modou",
+            "nom": "ndiaye",
+            "matricule": "modoundiaye",
+            "gmail": "modou@gmail.com",
+            "password": "vigile"
+        }
+    ],
+    "Promotion": [
+        {
             "MatriculePromo": "promotion 2025",
             "filiere": "hackeuse",
             "photoPromo": "\/WhatsApp Image 2025-03-18 at 20.51.16 (2).jpeg",
@@ -34,7 +41,10 @@
             "fin": "2025-11-17",
             "etat": "inactive",
             "nb_apprenants": 156,
-            "referentiels": ["dev-web", "hackeuse"]
+            "referentiels": [
+                "dev-web",
+                "hackeuse"
+            ]
         },
         {
             "MatriculePromo": "Promo 2020",
@@ -44,7 +54,11 @@
             "fin": "2020-11-17",
             "etat": "inactive",
             "nb_apprenants": 120,
-            "referentiels": ["dev-web", "ref-digital", "hackeuse"]
+            "referentiels": [
+                "dev-web",
+                "ref-digital",
+                "hackeuse"
+            ]
         },
         {
             "MatriculePromo": "Promo 2019",
@@ -54,7 +68,9 @@
             "fin": "2019-11-17",
             "etat": "inactive",
             "nb_apprenants": 162,
-            "referentiels": ["dev-web"]
+            "referentiels": [
+                "dev-web"
+            ]
         },
         {
             "MatriculePromo": "2021",
@@ -64,7 +80,9 @@
             "fin": "2025-04-25",
             "etat": "inactive",
             "nb_apprenants": 90,
-            "referentiels": ["dev-web"]
+            "referentiels": [
+                "dev-web"
+            ]
         },
         {
             "MatriculePromo": "Promotion 2019",
@@ -74,7 +92,9 @@
             "fin": "11\/08\/2019",
             "etat": "inactive",
             "nb_apprenants": 190,
-            "referentiels": ["dev-web"]
+            "referentiels": [
+                "dev-web"
+            ]
         },
         {
             "MatriculePromo": "promo 2023",
@@ -84,7 +104,9 @@
             "fin": "09\/10\/2023",
             "etat": "inactive",
             "nb_apprenants": 125,
-            "referentiels": ["dev-web"]
+            "referentiels": [
+                "dev-web"
+            ]
         },
         {
             "MatriculePromo": "promo 2010",
@@ -94,7 +116,9 @@
             "fin": "01\/08\/2010",
             "etat": "inactive",
             "nb_apprenants": 50,
-            "referentiels": ["dev-web"]
+            "referentiels": [
+                "dev-web"
+            ]
         },
         {
             "MatriculePromo": "promo wane",
@@ -103,43 +127,51 @@
             "debut": "21\/01\/2025",
             "fin": "01\/07\/2025",
             "etat": "inactive",
-            "referentiels": ["dev-web"]
+            "referentiels": [
+                "dev-web"
+            ]
         }
     ],
-    "Referentiels": [{
+    "Referentiels": [
+        {
             "Nom": "Dev-Web",
             "NombresModule": 8,
             "NombresApprenant": 50,
             "Description": "Contre-indices de synth\u00e9tique, le r\u00e9f\u00e9rence digital pathique...",
-            "PhotoRef": "\/WhatsApp Image 2025-03-18 at 20.51.16 (1).jpeg"
+            "PhotoRef": "\/WhatsApp Image 2025-03-18 at 20.51.16 (1).jpeg",
+            "statut": "inactive"
         },
         {
             "Nom": "Ref-digital",
             "NombresModule": 8,
             "NombresApprenant": 50,
             "Description": "Contre-indices de synth\u00e9tique, le r\u00e9f\u00e9rence digital pathique...",
-            "PhotoRef": "\/WhatsApp Image 2025-03-18 at 20.51.16 (1).jpeg"
+            "PhotoRef": "\/WhatsApp Image 2025-03-18 at 20.51.16 (1).jpeg",
+            "statut": "inactive"
         },
         {
             "Nom": "hackeuse",
             "NombresModule": 8,
             "NombresApprenant": 50,
             "Description": "Contre-indices de synth\u00e9tique, le r\u00e9f\u00e9rence digital pathique...",
-            "PhotoRef": "\/WhatsApp Image 2025-03-18 at 20.51.16 (1).jpeg"
+            "PhotoRef": "\/WhatsApp Image 2025-03-18 at 20.51.16 (1).jpeg",
+            "statut": "inactive"
         },
         {
             "Nom": "dev-data",
             "NombresModule": 8,
             "NombresApprenant": 50,
             "Description": "Contre-indices de synth\u00e9tique, le r\u00e9f\u00e9rence digital pathique...",
-            "PhotoRef": "\/WhatsApp Image 2025-03-18 at 20.51.16 (1).jpeg"
+            "PhotoRef": "\/WhatsApp Image 2025-03-18 at 20.51.16 (1).jpeg",
+            "statut": "inactive"
         },
         {
             "Nom": "Dev-Web",
             "NombresModule": 8,
             "NombresApprenant": 50,
             "Description": "Contre-indices de synth\u00e9tique, le r\u00e9f\u00e9rence digital pathique...",
-            "PhotoRef": "\/WhatsApp Image 2025-03-18 at 20.51.16 (1).jpeg"
+            "PhotoRef": "\/WhatsApp Image 2025-03-18 at 20.51.16 (1).jpeg",
+            "statut": "inactive"
         }
     ]
 }

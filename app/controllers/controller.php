@@ -52,6 +52,13 @@ return [
         }
 
         return null;
-    }
+    },
+
+    Fonction::FPC->value => function(string $databaseFile,$database): string {
+        $result = file_put_contents($databaseFile, json_encode($database, JSON_PRETTY_PRINT));
+        return $result !== false ? (string)$result : '';
+        ;
+    },
+
 ];
 

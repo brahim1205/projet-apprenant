@@ -1,45 +1,38 @@
 {
-    "Admin": [
-        {
-            "role": "admin",
-            "prenom": "coach",
-            "nom": "wane",
-            "matricule": "wane1",
-            "gmail": "wane@gmail.com",
-            "password": "wane123",
-            "ref": "dev-web"
-        }
-    ],
-    "Apprenant": [
-        {
-            "role": "apprenant",
-            "prenom": "khouss",
-            "nom": "ngom",
-            "matricule": "khoussngom",
-            "gmail": "khoussn@gmail.com",
-            "password": "marakhib",
-            "ref": "dev-web",
-            "promo": "promotion 2025"
-        }
-    ],
-    "Vigile": [
-        {
-            "role": "vigile",
-            "prenom": "modou",
-            "nom": "ndiaye",
-            "matricule": "modoundiaye",
-            "gmail": "modou@gmail.com",
-            "password": "vigile"
-        }
-    ],
-    "Promotion": [
-        {
+    "Admin": [{
+        "role": "admin",
+        "prenom": "coach",
+        "nom": "wane",
+        "matricule": "wane1",
+        "gmail": "wane@gmail.com",
+        "password": "wane123",
+        "ref": "dev-web"
+    }],
+    "Apprenant": [{
+        "role": "apprenant",
+        "prenom": "khouss",
+        "nom": "ngom",
+        "matricule": "khoussngom",
+        "gmail": "khoussn@gmail.com",
+        "password": "marakhib",
+        "ref": "dev-web",
+        "promo": "promotion 2025"
+    }],
+    "Vigile": [{
+        "role": "vigile",
+        "prenom": "modou",
+        "nom": "ndiaye",
+        "matricule": "modoundiaye",
+        "gmail": "modou@gmail.com",
+        "password": "vigile"
+    }],
+    "Promotion": [{
             "MatriculePromo": "promotion 2025",
             "filiere": "hackeuse",
             "photoPromo": "\/WhatsApp Image 2025-03-18 at 20.51.16 (2).jpeg",
             "debut": "2025-02-06",
             "fin": "2025-11-17",
-            "etat": "inactive",
+            "etat": "active",
             "nb_apprenants": 156,
             "referentiels": [
                 "dev-web",
@@ -132,8 +125,7 @@
             ]
         }
     ],
-    "Referentiels": [
-        {
+    "Referentiels": [{
             "Nom": "Dev-Web",
             "NombresModule": 8,
             "NombresApprenant": 50,
@@ -152,7 +144,7 @@
         {
             "Nom": "hackeuse",
             "NombresModule": 8,
-            "NombresApprenant": 50,
+            "NombresApprenant": 30,
             "Description": "Contre-indices de synth\u00e9tique, le r\u00e9f\u00e9rence digital pathique...",
             "PhotoRef": "\/WhatsApp Image 2025-03-18 at 20.51.16 (1).jpeg",
             "statut": "inactive"
@@ -170,7 +162,7 @@
             "NombresModule": 3,
             "Description": "server & cloud",
             "NombresApprenant": 30,
-            "photoRef": "\/assets\/images\/WhatsApp Image 2025-03-18 at 20.54.41 (1).jpeg",
+            "photoRef": "\/WhatsApp Image 2025-03-18 at 20.51.16 (1).jpeg",
             "statut": "inactive"
         }
     ]

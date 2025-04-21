@@ -38,6 +38,10 @@ function login(array $params, array $con, array &$donnee,$controller) : void {
             $_SESSION['message'] = Textes::PasObli->value;
      
             include __DIR__ . Chemins::ViewLogin->value;}
+       else {
+            $_SESSION['message'] = Textes::LogPasInv->value;
+            include __DIR__ . Chemins::ViewLogin->value;
+        }     
 
     }
 

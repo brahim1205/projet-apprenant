@@ -20,7 +20,7 @@ return [
 
     Fonction::Req->value => fn(string $routes) =>require __DIR__ . $routes,
 
- 
+
     Fonction::Render->value => function(string $layoutPath, string $contentPath, array $data = []): void {
         
         ob_start();
@@ -34,6 +34,24 @@ return [
         
         
         echo ob_get_clean();
+    },
+
+    Fonction::SavePhoto->value => function(array $photo): ?string {
+        $rootPath = dirname(__DIR__, 2);
+        $uploadDir = $rootPath . '/public' . Chemins::CheminAssetImage->value;
+
+        if (!is_dir($uploadDir)) {
+            mkdir($uploadDir, 0777, true);
+        }
+
+        $filename = basename($photo['name']);
+        $filePath = $uploadDir . '/' . $filename;
+
+        if (move_uploaded_file($photo['tmp_name'], $filePath)) {
+            return Chemins::CheminAssetImage->value . '/' . $filename;
+        }
+
+        return null;
     }
 ];
 

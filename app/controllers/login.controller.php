@@ -28,19 +28,20 @@ function login(array $params, array $con, array &$donnee,$controller) : void {
     } elseif ((empty($id)) && (empty($password))) {
             $_SESSION['message'] = Textes::TLO->value;
           
-            include __DIR__ . Chemins::ViewLogin->value;
+           $controller[Fonction::Inclusion->value](Chemins::ViewLogin->value);
         }elseif ((empty($id)) && (isset($password))) {
             $_SESSION['message'] = Textes::LogObli->value;
         
-            include __DIR__ . Chemins::ViewLogin->value;
+            $controller[Fonction::Inclusion->value](Chemins::ViewLogin->value);
         }
         elseif ((empty($password)) && (isset($id))) {
             $_SESSION['message'] = Textes::PasObli->value;
      
-            include __DIR__ . Chemins::ViewLogin->value;}
+            $controller[Fonction::Inclusion->value] (Chemins::ViewLogin->value);
+        }
        else {
             $_SESSION['message'] = Textes::LogPasInv->value;
-            include __DIR__ . Chemins::ViewLogin->value;
+            $controller[Fonction::Inclusion->value](Chemins::ViewLogin->value) ;
         }     
 
     }

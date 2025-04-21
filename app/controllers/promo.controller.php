@@ -5,16 +5,14 @@ namespace App\ControllersPromo;
 use App\Enums\Fonction\Fonction;
 use App\MESS\Enums\Textes;
 use Chemins;
+$controller=require __DIR__ . "/controller.php";
+$servicePromo = $controller[Fonction::Inclusion->value](Chemins::ServicePromo->value);
+$validator = $controller[Fonction::Inclusion->value](Chemins::Validator->value);
 
-$servicePromo = include __DIR__ . Chemins::ServicePromo->value;
-$validator = include __DIR__ . Chemins::Validator->value;
 
-function redirectionPromo(string $path): void {
-    header("Location:/" . $path);
-    exit;
-}
 
-function ajoutPromo(array $params, array $validator, array $servicePromo): array {
+
+function ajoutPromo(array $params, array $validator, array $servicePromo,$controller): array {
     $donnee = include __DIR__ . Chemins::Model->value;
     $database = &$donnee['database'];
     $databaseFile = $donnee['databaseFile'];
@@ -48,16 +46,7 @@ function ajoutPromo(array $params, array $validator, array $servicePromo): array
         return $erreurs;
     }
 
-    $rootPath = dirname(__DIR__, 2);
-    $uploadDir = $rootPath . '/public' . Chemins::CheminAssetImage->value;
-
-    if (!is_dir($uploadDir)) {
-        mkdir($uploadDir, 0777, true);
-    }
-
-    $filename = basename($photoPromo['name']);
-    move_uploaded_file($photoPromo['tmp_name'], $uploadDir . '/' . $filename);
-    $photoPromoPath = '/' . $filename;
+    $photoPromoPath= $controller[Fonction::SavePhoto->value]($photoPromo);
 
     if ($servicePromo['ajouterPromo']($database, $nomPromo, $dateDebut, $dateFin, $referentiel, $photoPromoPath)) {
         file_put_contents($databaseFile, json_encode($database, JSON_PRETTY_PRINT));
@@ -71,7 +60,7 @@ function ajoutPromo(array $params, array $validator, array $servicePromo): array
 
 
 
-function affichageAllPromo(array $servicePromo): void {
+function affichageAllPromo(array $servicePromo,$controller): void {
     $donnee = include __DIR__ . Chemins::Model->value;
     $database = $donnee['database'];
 
@@ -105,13 +94,13 @@ function affichageAllPromo(array $servicePromo): void {
         'pageActuelle' => $page,
     ];
 
-    $grillePromotion = include __DIR__ . Chemins::Promotion->value;
-    $layout = include __DIR__ . Chemins::Layout->value;
+    $grillePromotion = $controller[Fonction::Inclusion->value](Chemins::Promotion->value);
+    $layout = $controller[Fonction::Inclusion->value](Chemins::Layout->value);
 
     echo $layout($grillePromotion($data));
 }
 
-function trouverPromo($nomPromo, $servicePromo,$mode) {
+function trouverPromo($nomPromo, $servicePromo,$mode,$controller) {
     $donnee = include __DIR__ . Chemins::Model->value;
     $database = $donnee['database'];
 
@@ -145,7 +134,7 @@ function trouverPromo($nomPromo, $servicePromo,$mode) {
 
 }
 
-function affichageListe(array $servicePromo){
+function affichageListe(array $servicePromo,$controller){
     $donnee = include __DIR__ . Chemins::Model->value;
     $database = $donnee['database'];
 
@@ -181,39 +170,39 @@ function affichageListe(array $servicePromo){
 
     
 
-    $ListePromotion = include __DIR__ . Chemins::PromotionListe->value;
+    $ListePromotion = $controller[Fonction::Inclusion->value](Chemins::PromotionListe->value);
 
 
     echo  $ListePromotion($data);
 }
 
-$grillePromoti= include __DIR__ . Chemins::Promotion->value;
-$layout = include __DIR__ . Chemins::Layout->value;
+$grillePromoti=$controller[Fonction::Inclusion->value](Chemins::Promotion->value);
+$layout =$controller[Fonction::Inclusion->value](Chemins::Layout->value);
 
 $grillePromotion=fn($data)=>$layout($grillePromoti($data));
 
-$ListePromotion = include __DIR__ . Chemins::PromotionListe->value;
+$ListePromotion = $controller[Fonction::Inclusion->value](Chemins::PromotionListe->value);
 
 
 return [
-    Fonction::ajoutPromo->value => function(array $params) use ($validator, $servicePromo) {
-        return ajoutPromo($params, $validator, $servicePromo);
+    Fonction::ajoutPromo->value => function(array $params) use ($validator, $servicePromo,$controller) {
+        return ajoutPromo($params, $validator, $servicePromo,$controller);
     },
-    Fonction::afficherAllPromos->value => function() use ($servicePromo) {
+    Fonction::afficherAllPromos->value => function() use ($servicePromo,$controller) {
 
-        affichageAllPromo($servicePromo);
-    },
-
-    Fonction::AffichageListe->value => function() use ($servicePromo) {
-
-        affichageListe($servicePromo);
+        affichageAllPromo($servicePromo,$controller);
     },
 
-    Fonction::trouverPromoGrille->value => function($nomPromo) use ($servicePromo,$grillePromotion) {
-        return trouverPromo($nomPromo, $servicePromo, $grillePromotion);
+    Fonction::AffichageListe->value => function() use ($servicePromo,$controller) {
+
+        affichageListe($servicePromo,$controller);
     },
 
-    Fonction::trouverPromoListe->value => function($nomPromo) use ($servicePromo,$ListePromotion) {
-        return trouverPromo($nomPromo, $servicePromo, $ListePromotion);
+    Fonction::trouverPromoGrille->value => function($nomPromo) use ($servicePromo,$grillePromotion,$controller) {
+        return trouverPromo($nomPromo, $servicePromo, $grillePromotion,$controller);
+    },
+
+    Fonction::trouverPromoListe->value => function($nomPromo) use ($servicePromo,$ListePromotion,$controller) {
+        return trouverPromo($nomPromo, $servicePromo, $ListePromotion,$controller);
     },
 ];

@@ -48,7 +48,7 @@
                             <div class="gerProm">Gérer les promotions de l'école</div>      
                         </div>
                         <div class="droite1">
-                            <a href="#form-popup"><p>+ Ajouter une promotion</p></a>
+                            <a href="#form-popup" id="btn-open-popup"><p>+ Ajouter une promotion</p></a>
                         </div>
                     </div>
 
@@ -249,6 +249,29 @@
             });
         });
         </script>
+
+                   <script>
+                        const openBtn = document.getElementById('btn-open-popup');
+                        const popup = document.querySelector('.popbi');
+                        const overlay = document.getElementById('form-popup');
+                        const cancelBtn = document.querySelector('.cancel');
+
+                        openBtn.addEventListener('click', () => {
+                            popup.classList.add('active');
+                            overlay.classList.add('active');
+                        });
+
+                        overlay.addEventListener('click', () => {
+                            popup.classList.remove('active');
+                            overlay.classList.remove('active');
+                        });
+
+                        cancelBtn.addEventListener('click', () => {
+                            popup.classList.remove('active');
+                            overlay.classList.remove('active');
+                        });
+                    </script>
+        
 
         </body>
         </html>

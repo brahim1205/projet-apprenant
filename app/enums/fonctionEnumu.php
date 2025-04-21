@@ -27,5 +27,13 @@ enum Fonction: string{
     case nbrAppr ="nbrAppr";
     case ajouterRef= "ajouterRef";
     case afficherAllRef = "afficherAllRef";
+    case AffichageRef = "affichageRef";
+    case AffichageToutRef = "affichageToutRef";
+    case SavePhoto = "savePhoto";
+    case StartSession = "startSession";
+    case SetSession = "setSession";
+    case GetSession = "getSession";
+    case UnsetSession = "unsetSession";
+    case DestroySession = "destroySession";
 
 }

@@ -5,7 +5,7 @@
 
     use App\Enums\Fonction\Fonction;
     use Chemins;
-
+    $controller=require __DIR__ . "/controller.php";
     function affichageRef(): void
     {
         $donnee = include __DIR__ . Chemins::Model->value;
@@ -56,6 +56,6 @@
     }
 
     return [
-        'affichageRef' => 'App\ControllersReferentiel\affichageRef',
-        'affichageToutRef' => 'App\ControllersReferentiel\affichageToutRef',
+        Fonction::AffichageRef->value => 'App\ControllersReferentiel\affichageRef',
+        Fonction::AffichageToutRef->value  => 'App\ControllersReferentiel\affichageToutRef',
     ];

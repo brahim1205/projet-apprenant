@@ -56,9 +56,12 @@ return function ($data) {
   <div class="main">
     <div class="top-bar">
       <h2><span style="color: orange;"><?= htmlspecialchars(end($data['Promotion'])['MatriculePromo']) ?> </span></h2>
-      <button style="padding: 10px 15px; background-color: #00775b; color: white; border-radius: 8px; border: none;">
+      <!-- <button style="padding: 10px 15px; background-color: #00775b; color: white; border-radius: 8px; border: none;">
         + Ajouter promotion
-      </button>
+      </button> -->
+      <div class="droite1">
+                            <a href="#form-popup" id="btn-open-popup"><p>+ Ajouter une promotion</p></a>
+      </div>
     </div>
 
     <div class="filters">
@@ -158,6 +161,80 @@ return function ($data) {
 
 
   </div>
+
+  <a id="form-popup" class="overlay" href="#"></a>
+            <div class="popbi">
+                <div class="popup">
+                    <h2>Créer une nouvelle promotion</h2>
+
+                    <?php if (!empty($erreurs)): ?>
+                        <div class="error-message">
+                            <ul>
+                                <?php foreach ($erreurs as $erreur): ?>
+                                    <li><?= htmlspecialchars($erreur) ?></li>
+                                <?php endforeach; ?>
+                            </ul>
+                        </div>
+                    <?php endif; ?>
+                    
+
+
+
+                    <form action="/promotion/ajout" method="post" enctype="multipart/form-data">
+                        <label for="nomPromo">Nom de la promotion</label>
+                        <input type="text" id="nom" name="nomPromo" placeholder="Ex: Promotion 2025" value="<?= htmlspecialchars($old['nomPromo'] ?? '') ?>">
+
+                        <div class="datePopup">
+                            <div class="popuDd">
+                                <label for="debut">Date de début</label>
+                                <input type="text" id="debut" name="date_debut" placeholder="Ex: 21/03/2000" value="<?= htmlspecialchars($old['date_debut'] ?? '') ?>">
+                            </div>
+                            <div class="popuDf">
+                                <label for="fin">Date de fin</label>
+                                <input type="text" id="fin" name="date_fin" placeholder="Ex: 21/03/2000" value="<?= htmlspecialchars($old['date_fin'] ?? '') ?>">
+                            </div>
+                        </div>
+
+                        <label for="photo">Photo de la promotion</label>
+                        <div class="photdp">
+                            <label for="photo" class="drop-area">
+                                <span class="aj">Ajouter</span> ou Glisser
+                            </label>
+                            <input type="file" id="photo" name="photo" accept="image/*" style="display: none;">
+                        </div>
+
+                        <label for="referentiel">Référentiels</label>
+                        <input type="search" id="referentiel" name="referentiel" placeholder="Rechercher un référentiel..." value="<?= htmlspecialchars($old['referentiel'] ?? '') ?>">
+
+                        <div class="actions">
+                            <a href="#"><button type="button" class="cancel">Annuler</button></a>
+                            <button type="submit" class="submit">Créer la promotion</button>
+                        </div>
+                    </form>
+
+                    
+                    <script>
+                        const openBtn = document.getElementById('btn-open-popup');
+                        const popup = document.querySelector('.popbi');
+                        const overlay = document.getElementById('form-popup');
+                        const cancelBtn = document.querySelector('.cancel');
+
+                        openBtn.addEventListener('click', () => {
+                            popup.classList.add('active');
+                            overlay.classList.add('active');
+                        });
+
+                        overlay.addEventListener('click', () => {
+                            popup.classList.remove('active');
+                            overlay.classList.remove('active');
+                        });
+
+                        cancelBtn.addEventListener('click', () => {
+                            popup.classList.remove('active');
+                            overlay.classList.remove('active');
+                        });
+                    </script>
+
 
 </body>
 </html>

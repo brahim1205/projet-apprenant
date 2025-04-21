@@ -116,5 +116,5 @@ if (isset($routes[$path])) {
     $handler();
 } else {
     http_response_code(404);
-    echo "Page non trouvée.";
+    include __DIR__ .Chemins::Erreur404->value;
 }

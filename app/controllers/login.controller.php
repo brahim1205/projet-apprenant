@@ -25,14 +25,22 @@ function login(array $params, array $con, array &$donnee,$controller) : void {
             'password' => $password,
         ];
         $controller[Fonction::Redirection->value]("promotion");
-    } else {
-        $errors = [
-            'msgId' => Textes::LogObli->value,
-            'msgP'  => Textes::PasObli->value,
-        ];
-        include __DIR__ . Chemins::ViewLogin->value;
+    } elseif ((empty($id)) && (empty($password))) {
+            $_SESSION['message'] = Textes::TLO->value;
+          
+            include __DIR__ . Chemins::ViewLogin->value;
+        }elseif ((empty($id)) && (isset($password))) {
+            $_SESSION['message'] = Textes::LogObli->value;
+        
+            include __DIR__ . Chemins::ViewLogin->value;
+        }
+        elseif ((empty($password)) && (isset($id))) {
+            $_SESSION['message'] = Textes::PasObli->value;
+     
+            include __DIR__ . Chemins::ViewLogin->value;}
+
     }
-}
+
 
 function logout()
 {

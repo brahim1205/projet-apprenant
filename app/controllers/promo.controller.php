@@ -59,8 +59,7 @@ function ajoutPromo(array $params, array $validator, array $servicePromo,$contro
 
 
 
-
-function affichageAllPromo(array $servicePromo,$controller): void {
+function affichageAllPromo(array $servicePromo, $controller): void {
     $donnee = include __DIR__ . Chemins::Model->value;
     $database = $donnee['database'];
 
@@ -72,11 +71,20 @@ function affichageAllPromo(array $servicePromo,$controller): void {
             !empty($promo['MatriculePromo']) && !empty($promo['filiere']) && !empty($promo['photoPromo']) && !empty($promo['debut']) && !empty($promo['fin']);
     });
 
+    $promoActive = array_filter($promotions, function($promo) {
+        return isset($promo['etat']) && strtolower($promo['etat']) === 'active';
+    });
 
-    $promotions = array_values($promotions); 
+    if (!empty($promoActive)) {
+       
+        $promotions = array_values($promoActive);
+    } else {
+        $promotions = array_values($promotions);
+    }
 
-    $page = isset($_GET['page']) ? (int)$_GET['page'] : 1; 
-    $perPage = 6; 
+    
+    $page = isset($_GET['page']) ? (int)$_GET['page'] : 1;
+    $perPage = 6;
 
     $totalPromotions = count($promotions);
     $totalPages = ceil($totalPromotions / $perPage);
@@ -84,7 +92,7 @@ function affichageAllPromo(array $servicePromo,$controller): void {
     $offset = ($page - 1) * $perPage;
     $promotionsPage = array_slice($promotions, $offset, $perPage);
 
-
+    
     $data = [
         'Promotion' => $promotionsPage,
         'nbrRef' => $servicePromo['nbrFilieres']($database),
@@ -100,8 +108,9 @@ function affichageAllPromo(array $servicePromo,$controller): void {
     echo $layout($grillePromotion($data));
 }
 
+
 function trouverPromo($nomPromo, $servicePromo,$mode,$controller) {
-    $donnee = include __DIR__ . Chemins::Model->value;
+    $donnee = $controller[Fonction::Inclusion->value](Chemins::Model->value);
     $database = $donnee['database'];
 
     $promoCherchee = $servicePromo['chercherPromo'](database: $database, nomPromo: $nomPromo);
@@ -126,13 +135,39 @@ function trouverPromo($nomPromo, $servicePromo,$mode,$controller) {
     }
     
 
-
-
-
     echo $mode($data);
 
-
 }
+function activePromo($nomPromo = null, $servicePromo, $controller) {
+    if (isset($nomPromo)) {
+        $donnee = $controller[Fonction::Inclusion->value](Chemins::Model->value);
+        $database = &$donnee['database']; 
+
+
+        $promoTrouvee = array_filter($database['Promotion'], function($promo) use ($nomPromo) {
+            return isset($promo['MatriculePromo']) && $promo['MatriculePromo'] === $nomPromo;
+        });
+
+        $promoActuelle = reset($promoTrouvee);
+
+        if ($promoActuelle) {
+            if ($promoActuelle['etat'] === 'active') {
+
+                $servicePromo[Fonction::DesactiveTout->value]($database);
+            } else {
+
+                $servicePromo[Fonction::DesactiveTout->value]($database);
+                $servicePromo[Fonction::ActivePromo->value]($database, $nomPromo);
+            }
+        }
+
+        $controller[Fonction::FPC->value]($donnee['databaseFile'], $database);
+    }
+
+    affichageAllPromo($servicePromo, $controller);
+}
+
+
 
 function affichageListe(array $servicePromo,$controller){
     $donnee = include __DIR__ . Chemins::Model->value;
@@ -204,5 +239,9 @@ return [
 
     Fonction::trouverPromoListe->value => function($nomPromo) use ($servicePromo,$ListePromotion,$controller) {
         return trouverPromo($nomPromo, $servicePromo, $ListePromotion,$controller);
+    },
+    Fonction::ActivePromo->value => function($nomPromo) use ($servicePromo, $controller) {
+        activePromo($nomPromo, $servicePromo, $controller);
+    
     },
 ];

@@ -61,8 +61,48 @@ return [
         }, $database['Apprenant']);
         return count($appr);
     },
+    
+    Fonction::RecupereStatut->value => function(array $database) {
         
+        $promotionsActives = array_filter($database['Promotion'], function($promo) {
+            return isset($promo['etat']) && $promo['etat'] === 'active';
+        });
 
-
+        return $promotionsActives;
+    },
+    
+    Fonction::DesactiveTout->value => function(array &$database): bool {
+        $desactive = false;
+    
+        if (isset($database['Promotion'])) {
+            array_walk($database['Promotion'], function (&$promo) use (&$desactive) {
+                if (isset($promo['etat']) && $promo['etat'] !== 'inactive') {
+                    $promo['etat'] = 'inactive';
+                    $desactive = true;
+                }
+            });
+        }
+    
+        return $desactive;
+    },
+    
+    
+    Fonction::ActivePromo->value => function(array &$database, string $matricule): bool {
+        $active = false;
+    
+        if (isset($database['Promotion'])) {
+            array_walk($database['Promotion'], function (&$promo) use ($matricule, &$active) {
+                if (isset($promo['MatriculePromo'])) {
+                    $promo['etat'] = ($promo['MatriculePromo'] === $matricule) ? 'active' : 'inactive';
+                    if ($promo['etat'] === 'active') {
+                        $active = true;
+                    }
+                }
+            });
+        }
+    
+        return $active;
+    },
+    
 ];
 ?>

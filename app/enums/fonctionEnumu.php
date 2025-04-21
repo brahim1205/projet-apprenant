@@ -37,5 +37,8 @@ enum Fonction: string{
     case DestroySession = "destroySession";
     case FPC = "filePutContents";
     case FGC = "fileGetContents";
+    case RecupereStatut ="recupereStatut";
+    case DesactiveTout = "desactiverTout";
+    case ActivePromo = "activePromo";
 
 }

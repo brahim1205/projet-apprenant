@@ -268,6 +268,27 @@
     justify-content: center;
 }
 
+.cadreProm a {
+    text-decoration: none;
+    color: var(--Noir);
+    margin-top: 10px;
+    margin-bottom: 10px;
+    height: 20%;
+    position: left;
+    width: 30%;
+    background-color: brown;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    margin-right: -65%;
+    border-radius: 25px 25px 25px 25px;
+    padding: auto;
+    background-color: transparent;
+    border: solid 1px var(--NoirClair);
+    gap: 3px;
+}
+
 .onOff {
     margin-top: 10px;
     margin-bottom: 10px;

@@ -112,12 +112,18 @@
                         <?php if (!empty($data['Promotion'])): ?>
                             <?php foreach ($data['Promotion'] as $promo): ?>
                                 <div class="cadreProm">
-                                    <div class="onOff">
+
+                                <a class="onOff" href="/promotion/active?matriculePromo=<?= urlencode($promo['MatriculePromo']) ?>">
+                                    
+                                  
                                         <div class="off"><?= htmlspecialchars($promo['etat'] ?? 'Inactive') ?></div>
                                         <div class="on">
                                             <img src="<?= Chemins::CheminAssetImage->value . '/power-button.png' ?>" alt="Power">
                                         </div>
-                                    </div>
+                                  
+                                    </a>
+
+
                                     <div class="infProm">
                                         <div class="PhotPro">
                                             <img src="<?= Chemins::CheminAssetImage->value . '/' . ($promo['photoPromo'] ?? 'imagesp7.jpeg') ?>" alt="Photo Promo">

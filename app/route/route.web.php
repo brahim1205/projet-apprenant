@@ -50,6 +50,18 @@ $routes = [
         }
     },
 
+    '/promotion/active' => function() use ($promotionController) {
+
+        $nomPromo = $_GET['matriculePromo'] ?? null;
+
+
+        if ($nomPromo) {
+            $promotionController['activePromo']($nomPromo);
+        } else {
+            $promotionController['activePromo']();
+        }
+    },
+
     '/promotion/liste' => function() use ($promotionController) {
         $recherche = $_GET['recherche'] ?? '';
         if (!empty($recherche)) {

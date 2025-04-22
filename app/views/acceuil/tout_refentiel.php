@@ -24,45 +24,49 @@ return function ($data) {
 
 
         <div class="Cherche">
-            <div class="search12">
-                <form action="" method="get">
-                    <input class="search1" type="text" name="recherche" placeholder="Rechercher un referentiel">
-                </form>
-            </div>
+        <div class="search12">
+            <form action="/referentiels" method="get">
+                <input id="search1" class="search1" type="text" name="recherche" placeholder="Rechercher un référentiel">
+            </form>
+        </div>
+        
+
 
 
         <div id="openModalBtn" class="Gril btn-ajouter " >+ Creer un référentiel</div>
-            
-        </div>
+        </div> 
+    
 
         <div class="separateur"></div>
 
         <div class="liste-refs">
-            <?php if(isset($data)): ?>
-                
-                <?php foreach ($data as $datas): ?>
-
-                    <div class="item-ref">
-                        <div class="containImage"><img src="<?= Chemins::CheminAssetImage->value . '/' . ($datas['PhotoRef'] ?? 'logo_odc.png') ?>" alt=""></div>
-                        <div class="titre-ref"><?= htmlspecialchars($datas['Nom'])?></div>
-                        <div class="nb-modeles"><?= htmlspecialchars($datas['NombresModule']).' '.'Module(s)'?></div>
-                        <div class="desc-ref"><?= htmlspecialchars($datas['Description'])?></div>
-                        <div class="Lvert"></div>
-                        <div class="derL">
-                            <div class="poin">
-                                <span class="points1"></span>
-                                <span class="points2"></span>
-                                <span class="points3"></span>
-                            </div>
-                            <div class="nbrAp"><p><?= htmlspecialchars($datas['NombresApprenant']).' '.'Apprenants'?></p></div>
-                        </div>
+    <?php if (!empty($data)): ?>
+        <?php foreach ($data as $datas): ?>
+            <div class="item-ref">
+                <div class="containImage">
+                    <img src="<?= Chemins::CheminAssetImage->value . '/' . ($datas['PhotoRef'] ?? 'logo_odc.png') ?>" alt="">
+                </div>
+                <div class="titre-ref"><?= htmlspecialchars($datas['Nom']) ?></div>
+                <div class="nb-modeles"><?= htmlspecialchars($datas['NombresModule']) . ' Module(s)' ?></div>
+                <div class="desc-ref"><?= htmlspecialchars($datas['Description']) ?></div>
+                <div class="Lvert"></div>
+                <div class="derL">
+                    <div class="poin">
+                        <span class="points1"></span>
+                        <span class="points2"></span>
+                        <span class="points3"></span>
                     </div>
-                <?php endforeach; ?>
-            <?php else: ?>
-                <p>Aucune promotion disponible.</p>
-            <?php endif; ?>
+                    <div class="nbrAp">
+                        <p><?= htmlspecialchars($datas['NombresApprenant']) . ' Apprenant(s)' ?></p>
+                    </div>
+                </div>
+            </div>
+        <?php endforeach; ?>
+    <?php else: ?>
+        <p>Aucune promotion disponible.</p>
+    <?php endif; ?>
+</div>
 
-     
         </div>
 
         <div class="pied-page">
@@ -123,36 +127,46 @@ return function ($data) {
 </div>
 
 <script>
-const modal = document.getElementById("referentielModal");
-const openBtn = document.getElementById("openModalBtn");  
-const closeBtn = document.querySelector(".close");
-const cancelBtn = document.querySelector(".cancel-btn");
+                const modal = document.getElementById("referentielModal");
+                const openBtn = document.getElementById("openModalBtn");  
+                const closeBtn = document.querySelector(".close");
+                const cancelBtn = document.querySelector(".cancel-btn");
 
-openBtn.onclick = () => modal.style.display = "block";
-closeBtn.onclick = () => modal.style.display = "none";
-cancelBtn.onclick = () => modal.style.display = "none";
+                openBtn.onclick = () => modal.style.display = "block";
+                closeBtn.onclick = () => modal.style.display = "none";
+                cancelBtn.onclick = () => modal.style.display = "none";
 
-window.onclick = (event) => {
-    if (event.target === modal) modal.style.display = "none";
-};
+                window.onclick = (event) => {
+                    if (event.target === modal) modal.style.display = "none";
+                };
 
-const dropArea = document.querySelector('.drop-area');
+                const dropArea = document.querySelector('.drop-area');
 
-dropArea.addEventListener('dragover', (e) => {
-    e.preventDefault();
-    dropArea.classList.add('dragover');
-});
+                dropArea.addEventListener('dragover', (e) => {
+                    e.preventDefault();
+                    dropArea.classList.add('dragover');
+                });
 
-dropArea.addEventListener('dragleave', () => {
-    dropArea.classList.remove('dragover');
-});
+                dropArea.addEventListener('dragleave', () => {
+                    dropArea.classList.remove('dragover');
+                });
 
-dropArea.addEventListener('drop', (e) => {
-    e.preventDefault();
-    dropArea.classList.remove('dragover');
-    const fileInput = document.getElementById('photo');
-    fileInput.files = e.dataTransfer.files;
-});
+                dropArea.addEventListener('drop', (e) => {
+                    e.preventDefault();
+                    dropArea.classList.remove('dragover');
+                    const fileInput = document.getElementById('photo');
+                    fileInput.files = e.dataTransfer.files;
+                });
+
+
+                document.querySelector('.search1').addEventListener('keydown', function(e) {
+                if (e.key === 'Enter') {
+                        e.preventDefault();
+                        this.form.submit();
+                    }
+                });
+
+
 </script>
 </html>
 <?php

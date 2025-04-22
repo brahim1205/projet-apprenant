@@ -57,7 +57,19 @@ return [
         return $unique;
     },
 
+    Fonction::ChercherRef->value => function($database, $nomRef) {
+        $nomRef = trim(strtolower($nomRef));
+    
+        $refs = array_filter($database['Referentiels'], function($ref) use ($nomRef) {
+            $nom = trim(strtolower($ref['Nom']));
+            return strpos($nom, $nomRef) !== false;
+        });
+    
+        return !empty($refs) ? array_values($refs) : null;
+    },
+    
 
 
+    
 ];
 ?>

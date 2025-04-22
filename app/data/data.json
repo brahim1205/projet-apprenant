@@ -1,38 +1,45 @@
 {
-    "Admin": [{
-        "role": "admin",
-        "prenom": "coach",
-        "nom": "wane",
-        "matricule": "wane1",
-        "gmail": "wane@gmail.com",
-        "password": "wane123",
-        "ref": "dev-web"
-    }],
-    "Apprenant": [{
-        "role": "apprenant",
-        "prenom": "khouss",
-        "nom": "ngom",
-        "matricule": "khoussngom",
-        "gmail": "khoussn@gmail.com",
-        "password": "marakhib",
-        "ref": "dev-web",
-        "promo": "promotion 2025"
-    }],
-    "Vigile": [{
-        "role": "vigile",
-        "prenom": "modou",
-        "nom": "ndiaye",
-        "matricule": "modoundiaye",
-        "gmail": "modou@gmail.com",
-        "password": "vigile"
-    }],
-    "Promotion": [{
+    "Admin": [
+        {
+            "role": "admin",
+            "prenom": "coach",
+            "nom": "wane",
+            "matricule": "wane1",
+            "gmail": "wane@gmail.com",
+            "password": "wane123",
+            "ref": "dev-web"
+        }
+    ],
+    "Apprenant": [
+        {
+            "role": "apprenant",
+            "prenom": "khouss",
+            "nom": "ngom",
+            "matricule": "khoussngom",
+            "gmail": "khoussn@gmail.com",
+            "password": "marakhib",
+            "ref": "dev-web",
+            "promo": "promotion 2025"
+        }
+    ],
+    "Vigile": [
+        {
+            "role": "vigile",
+            "prenom": "modou",
+            "nom": "ndiaye",
+            "matricule": "modoundiaye",
+            "gmail": "modou@gmail.com",
+            "password": "vigile"
+        }
+    ],
+    "Promotion": [
+        {
             "MatriculePromo": "promotion 2025",
             "filiere": "hackeuse",
             "photoPromo": "\/WhatsApp Image 2025-03-18 at 20.51.16 (2).jpeg",
             "debut": "2025-02-06",
             "fin": "2025-11-17",
-            "etat": "active",
+            "etat": "inactive",
             "nb_apprenants": 156,
             "referentiels": [
                 "dev-web",
@@ -45,7 +52,7 @@
             "photoPromo": "\/WhatsApp Image 2025-03-18 at 20.51.16 (1).jpeg",
             "debut": "2020-02-17",
             "fin": "2020-11-17",
-            "etat": "inactive",
+            "etat": "active",
             "nb_apprenants": 120,
             "referentiels": [
                 "dev-web",
@@ -125,7 +132,8 @@
             ]
         }
     ],
-    "Referentiels": [{
+    "Referentiels": [
+        {
             "Nom": "Dev-Web",
             "NombresModule": 8,
             "NombresApprenant": 50,

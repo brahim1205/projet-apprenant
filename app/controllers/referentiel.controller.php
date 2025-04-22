@@ -109,6 +109,36 @@
         
     }
 
+    function trouverRef($nomRef, $modelRef, $controller)
+    {
+        $donnee = $controller[Fonction::Inclusion->value](Chemins::Model->value);
+        $database = $donnee['database'];
+    
+        $refCherchee = $modelRef['chercherRef'](database:$database, nomRef:$nomRef);
+    
+        if ($refCherchee) {
+            if (!isset($refCherchee[0])) {
+                $refCherchee = [$refCherchee];
+            }
+            $data = $refCherchee;
+         
+        } else {
+            $data = [
+                'Referentiels' => [],
+                'message' => 'Aucun référentiel trouvé pour ce terme de recherche.'
+            ];
+        }
+    
+      
+       
+        $ref = $controller[Fonction::Inclusion->value](Chemins::Tous_referentiel->value);
+        $layout = $controller[Fonction::Inclusion->value](Chemins::Layout->value);
+    
+        echo $layout($ref($data));
+    }
+    
+
+
     return [
         Fonction::AffichageRef->value => function() use ($controller) {
             affichageRef($controller);
@@ -118,5 +148,9 @@
         },
         Fonction::ajouterRef->value  => function($params) use ($controller) {
             ajouterRef($params, $controller);
+        },
+
+        Fonction::ChercherRef->value => function($nomRef) use ($modelRef, $controller) {
+            trouverRef($nomRef, $modelRef,$controller);
         },
     ];

@@ -101,7 +101,14 @@ $routes = [
 
 
 
-    '/referentiels' => $referentielController['affichageRef'],
+    '/referentiels' => function () use ($referentielController) {
+    $recherche = $_GET['recherche'] ?? '';
+    if (!empty($recherche)) {
+        $referentielController['chercherRef']($recherche);
+    } else {
+        $referentielController['affichageRef']();
+    }
+    },
 
     '/Tout_referentiels' => $referentielController['affichageToutRef'],
 

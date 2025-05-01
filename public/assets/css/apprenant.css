@@ -1,0 +1,264 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+body {
+    background-color: #f5f5f5;
+}
+
+.container {
+    display: flex;
+
+}
+.main-content {
+    flex: 1;
+    padding: 20px;
+    overflow-y: auto; /* Permet le défilement vertical */
+
+}
+
+.page-title {
+    font-size: 24px;
+    color: #008577;
+    margin-bottom: 5px;
+    display: flex;
+    align-items: center;
+}
+
+.apprentice-count {
+    background-color: #FFE0CC;
+    color: #FF7900;
+    font-size: 12px;
+    padding: 2px 8px;
+    border-radius: 10px;
+    margin-left: 10px;
+}
+
+.filters {
+    display: flex;
+    gap: 15px;
+    margin: 20px 0;
+}
+
+.search-input {
+    flex: 1;
+    position: relative;
+}
+
+.search-input input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    outline: none;
+}
+
+.search-input i {
+    position: absolute;
+    left: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #999;
+}
+
+.filter-dropdown {
+    position: relative;
+    min-width: 200px;
+}
+
+.filter-dropdown select {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    appearance: none;
+    background-color: white;
+    cursor: pointer;
+}
+
+.action-buttons {
+    display: flex;
+    gap: 15px;
+    margin: 20px 0;
+    justify-content: flex-end;
+}
+
+.btn {
+    padding: 10px 15px;
+    border-radius: 4px;
+    font-size: 14px;
+    font-weight: bold;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+}
+
+.btn i {
+    margin-right: 5px;
+}
+
+.btn-primary {
+    background-color: #008577;
+    color: white;
+    border: none;
+}
+
+.btn-outline {
+    background-color: white;
+    color: #333;
+    border: 1px solid #ddd;
+}
+
+.tabs {
+    display: flex;
+    margin: 20px 0;
+    border-bottom: 1px solid #ddd;
+}
+
+.tab {
+    padding: 15px 20px;
+    font-size: 16px;
+    font-weight: bold;
+    color: #666;
+    cursor: pointer;
+    position: relative;
+}
+
+.tab.active {
+    color: #FF7900;
+}
+
+.tab.active::after {
+    content: '';
+    position: absolute;
+    bottom: -1px;
+    left: 0;
+    width: 100%;
+    height: 3px;
+    background-color: #FF7900;
+}
+
+.table-container {
+    background-color: white;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+th {
+    background-color: #FF7900;
+    color: white;
+    text-align: left;
+    padding: 15px;
+    font-weight: normal;
+}
+
+td {
+    padding: 15px;
+    border-bottom: 1px solid #eee;
+    font-size: 14px;
+}
+
+tr:hover {
+    background-color: #f9f9f9;
+}
+
+.profile-pic {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.status {
+    padding: 5px 10px;
+    border-radius: 4px;
+    font-size: 12px;
+    font-weight: bold;
+}
+
+.status-active {
+    background-color: #E6F7E6;
+    color: #28a745;
+}
+
+.status-rejected {
+    background-color: #FFE6E6;
+    color: #dc3545;
+}
+
+.referentiel {
+    padding: 5px 10px;
+    border-radius: 4px;
+    font-size: 12px;
+    font-weight: bold;
+}
+
+.ref-web {
+    color: #17a2b8;
+}
+
+.ref-data {
+    color: #6610f2;
+}
+
+.ref-dig {
+    color: #007bff;
+}
+
+.ref-hack {
+    color: #e83e8c;
+}
+
+.action-menu {
+    color: #999;
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 16px;
+    text-align: center;
+}
+
+.pagination {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 20px;
+    font-size: 14px;
+}
+
+.pagination-info {
+    color: #666;
+}
+
+.pagination-controls {
+    display: flex;
+    align-items: center;
+}
+
+.page-button {
+    width: 30px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 5px;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.page-button.active {
+    background-color: #FF7900;
+    color: white;
+}
+
+.page-button:hover:not(.active) {
+    background-color: #f0f0f0;
+}

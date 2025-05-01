@@ -1,2 +1,0 @@
-<?php
-// Erreurs en français

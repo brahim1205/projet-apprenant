@@ -1,119 +1,75 @@
-<?php
-use App\MESS\Enums\Textes;
-if (!isset($_SESSION['user'])) {
-    header("Location: /login");
-    exit();
-}
-?>
-
-<?php 
-return function($contenu){
-    ob_start();
-    
-
-    $path = "http://" . $_SERVER["HTTP_HOST"];
-    $currentPath = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH); 
-?>
-
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="<?= $path .Chemins::CheminAssetCss->value."/layout.css"?>">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    <title>Document</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Sonatel Dashboard</title>
+  <link href="https://cdn.jsdelivr.net/npm/remixicon/fonts/remixicon.css" rel="stylesheet">
+  <link rel="stylesheet" href="/assets/css/layout.css">
+  <link rel="stylesheet" href="/assets/css/dashboard.css">      
+  <link rel="stylesheet" href="/assets/css/apprenants.css">    
+    <link href="https://cdn.jsdelivr.net/npm/remixicon/fonts/remixicon.css" rel="stylesheet">
+    <link rel="stylesheet" href="/assets/css/addreferentiel.css">
 
+  <link rel="stylesheet" href="/assets/css/promo.css">
 
 </head>
-
 <body>
-    <div class="container">
-        <div class="sidebar">
-            <div class="logPRO">
-                <div class="log">
-                    <img src="<?= $path.Chemins::CheminAssetImage->value."/logo_odc.png"?>" alt="logo sonatel">
-                </div>
-                <div class="Prom">
-                    <h5>Promotion - 2025</h5>
-                </div>
-            </div>
+  <div class="container">
+    <!-- Sidebar -->
+    <aside class="sidebar">
+      <div class="logo-section">
+        <img src="/assets/images/logo_odc.png" alt="Sonatel Logo" class="logo-img">
+        <div class="badge">Promotion - 2025</div>
+      </div>
 
-            <div class="menu">
-                <div class="trait"></div>
+      <nav class="menu">
+        <a href="index.php?route=dashboard"><i class="ri-dashboard-line"></i><span>Tableau de bord</span></a>
+        <a href="index.php?route=promo"><i class="ri-folder-2-line"></i><span>Promotions</span></a>
+        <a href="index.php?route=referentiel"><i class="ri-folder-2-line"></i><span>Référentiels</span></a>
+        <a href="index.php?route=apprenants"><i class="ri-user-3-line"></i><span>Apprenants</span></a>
+        <a href="#"><i class="ri-calendar-check-line"></i><span>Gestion des présences</span></a>
+        <a href="#"><i class="ri-laptop-line"></i><span>Kits & Laptops</span></a>
+        <a href="#"><i class="ri-bar-chart-line"></i><span>Rapports & Stats</span></a>
+      </nav>
 
-                <a href="#" class="<?= ($currentPath == '/dashboard') ? 'active' : '' ?>">
-                    <div><i class="fa-solid fa-house"></i></div>
-                    <div>Tableau de bord</div>
-                </a>
+      <!-- Bouton déconnexion tout en bas -->
+      <div class="logout-section">
+        <a href="index.php?route=logout" class="logout">
+          <i class="ri-logout-box-r-line"></i><span>Déconnexion</span>
+        </a>
+      </div>
+    </aside>
 
-                <a href="/promotion" class="<?= ($currentPath == '/promotion') ? 'active' : '' ?>">
-                    <div><i class="fa-regular fa-folder"></i></div>
-                    <div>Promotions</div>
-                </a>
-
-                <a href="/referentiels" class="<?= ($currentPath == '/referentiels') ? 'active' : '' ?>">
-                    <div><i class="fa-solid fa-book"></i></div>
-                    <div>Référentiels</div>
-                </a>
-
-                <a href="#" class="<?= ($currentPath == '/apprenants') ? 'active' : '' ?>">
-                    <div><i class="fa-regular fa-user"></i></div>
-                    <div>Apprenants</div>
-                </a>
-
-                <a href="#" class="<?= ($currentPath == '/presences') ? 'active' : '' ?>">
-                    <div><i class="fa-solid fa-file"></i></div>
-                    <div>Gestion des présences</div>
-                </a>
-
-                <a href="#" class="<?= ($currentPath == '/kits') ? 'active' : '' ?>">
-                    <div><i class="fa-solid fa-laptop"></i></div>
-                    <div>Kits & Laptops</div>
-                </a>
-
-                <a href="#" class="<?= ($currentPath == '/rapports') ? 'active' : '' ?>">
-                    <div><i class="fa-solid fa-signal"></i></div>
-                    <div>Rapports & stats</div>
-                </a>
-            </div>
-
-            <div class="saysay"></div>
-
-            <div class="form">
-                <form action="/logout" method="post">
-                    <button type="submit" class="decon">
-                        <i class="fa-solid fa-right-from-bracket"></i> Déconnexion
-                    </button>
-                </form>
-            </div>
+    <!-- Main -->
+    <div class="main">
+      <header class="topbar">
+        <div class="search">
+          <input type="text" placeholder="Rechercher...">
         </div>
-
-        <div class="droite">
-            <div class="nav">
-                <div class="cherche">
-                    <form action="">
-                        <input type="search" placeholder="Rechercher">
-                    </form>
-                </div>
-                <div class="infUser">
-                    <div class="cloche"><i class="fa-regular fa-bell"></i></div>
-                    <div class="icPrenom">A</div>
-                    <div class="loginfo">
-                    <?= htmlspecialchars($_SESSION['user']['id'] ?? 'Non connecté') ?>                        <div class="Admi">Administrateur</div>
-                    </div>
-                </div>
+        <div class="profile">
+          <i class="ri-notification-3-line"></i>
+          <div class="user">
+            <div class="avatar">A</div>
+            <div class="info">
+              <span>admin@sonatel-academy.sn</span>
+              <small>Administrateur</small>
             </div>
-            <div class="variant">
-                 <?=  $contenu ?>
-            </div>
+          </div>
         </div>
+      </header>
+
+      <!-- Section dynamique pour le contenu -->
+      <div class="content">
+        <?php echo $content ?? ''; ?>
+      </div>
+      <?php
+      // Inclure dynamiquement le contenu de la page
+      if (isset($content) && file_exists($content)) {
+          require_once $content;
+      } 
+      ?>
     </div>
+  </div>
 </body>
-
 </html>
-
-<?php 
- return ob_get_clean();
-};
-?>

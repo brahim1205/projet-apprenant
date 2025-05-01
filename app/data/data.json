@@ -1,23 +1,32 @@
 {
-    "Admin": [
+    "users": [
         {
-            "role": "admin",
-            "prenom": "coach",
-            "nom": "wane",
-            "matricule": "wane1",
-            "gmail": "wane@gmail.com",
-            "password": "wane123",
-            "ref": "dev-web"
+            "login": "admin",
+            "password": "passer",
+            "role": "Admin",
+            "email": "admin@sonatel-academy.sn"
+        },
+        {
+            "login": "vigile",
+            "password": "vigile123",
+            "role": "Vigile",
+            "email": "vigile@sonatel-academy.sn"
+        },
+        {
+            "login": "apprenant",
+            "password": "apprenant123",
+            "role": "Apprenant",
+            "email": "apprenant@sonatel-academy.sn"
         }
     ],
     "Apprenant": [
         {
             "role": "apprenant",
-            "prenom": "khouss",
-            "nom": "ngom",
-            "matricule": "khoussngom",
-            "gmail": "khoussn@gmail.com",
-            "password": "marakhib",
+            "prenom": "Cherif",
+            "nom": "Aidara",
+            "matricule": "khaliloulah",
+            "gmail": "khaliloulah@gmail.com",
+            "password": "khaliloulah",
             "ref": "dev-web",
             "promo": "promotion 2025"
         }
@@ -34,144 +43,191 @@
     ],
     "Promotion": [
         {
-            "MatriculePromo": "promotion 2025",
-            "filiere": "hackeuse",
-            "photoPromo": "\/WhatsApp Image 2025-03-18 at 20.51.16 (2).jpeg",
-            "debut": "2025-02-06",
-            "fin": "2025-11-17",
-            "etat": "inactive",
-            "nb_apprenants": 156,
-            "referentiels": [
-                "dev-web",
-                "hackeuse"
-            ]
+            "id": 1,
+            "nom": "khalil",
+            "date_debut": "2025-01-07",
+            "date_fin": "2026-05-21",
+            "referentiel": "dev-web",
+            "statut": "inactive"
         },
         {
-            "MatriculePromo": "Promo 2020",
-            "filiere": "Ref-digital",
-            "photoPromo": "\/WhatsApp Image 2025-03-18 at 20.51.16 (1).jpeg",
-            "debut": "2020-02-17",
-            "fin": "2020-11-17",
-            "etat": "active",
-            "nb_apprenants": 120,
-            "referentiels": [
-                "dev-web",
-                "ref-digital",
-                "hackeuse"
-            ]
+            "id": 2,
+            "nom": "Promotion 2022",
+            "date_debut": "2025-04-28",
+            "date_fin": "2026-06-24",
+            "referentiel": "hackeuse",
+            "statut": "inactive"
         },
         {
-            "MatriculePromo": "Promo 2019",
-            "filiere": "dev-web",
-            "photoPromo": "\/WhatsApp Image 2025-03-18 at 20.51.16 (1).jpeg",
-            "debut": "2019-01-17",
-            "fin": "2019-11-17",
-            "etat": "inactive",
-            "nb_apprenants": 162,
-            "referentiels": [
-                "dev-web"
-            ]
+            "id": 3,
+            "nom": "Promotion 2025",
+            "date_debut": "2025-04-23",
+            "date_fin": "2025-05-14",
+            "referentiel": "hackeuse",
+            "photo": "\/uploads\/680f118dec79b_Ch\u00e9rif Ibrahima Aidara Sadio.jpg",
+            "statut": "inactive"
         },
         {
-            "MatriculePromo": "2021",
-            "filiere": "dev-data",
-            "photoPromo": "\/WhatsApp Image 2025-03-18 at 20.54.31.jpeg",
-            "debut": "2021-01-17",
-            "fin": "2025-04-25",
-            "etat": "inactive",
-            "nb_apprenants": 90,
-            "referentiels": [
-                "dev-web"
-            ]
+            "id": 4,
+            "nom": "Promotion 2020",
+            "date_debut": "2025-04-10",
+            "date_fin": "2025-06-20",
+            "referentiel": "hackeuse",
+            "photo": null,
+            "statut": "inactive"
         },
         {
-            "MatriculePromo": "Promotion 2019",
-            "filiere": "dev-web",
-            "photoPromo": "\/WhatsApp Image 2025-03-18 at 20.54.39 (1).jpeg",
-            "debut": "21\/02\/2019",
-            "fin": "11\/08\/2019",
-            "etat": "inactive",
-            "nb_apprenants": 190,
-            "referentiels": [
-                "dev-web"
-            ]
+            "id": 5,
+            "nom": "AIDARA SADIO",
+            "date_debut": "2025-04-09",
+            "date_fin": "2025-05-30",
+            "referentiel": "hackeuse",
+            "photo": "\/uploads\/680f149372188_Ch\u00e9rif Ibrahima Aidara Sadio.jpg",
+            "statut": "active"
         },
         {
-            "MatriculePromo": "promo 2023",
-            "filiere": "dev-data",
-            "photoPromo": "\/WhatsApp Image 2025-03-18 at 20.51.18 (2).jpeg",
-            "debut": "21\/04\/2023",
-            "fin": "09\/10\/2023",
-            "etat": "inactive",
-            "nb_apprenants": 125,
-            "referentiels": [
-                "dev-web"
-            ]
-        },
-        {
-            "MatriculePromo": "promo 2010",
-            "filiere": "dev-web",
-            "photoPromo": "\/3d-render-grunge-room-interior-with-foggy-atmosphere.jpg",
-            "debut": "01\/01\/2010",
-            "fin": "01\/08\/2010",
-            "etat": "inactive",
-            "nb_apprenants": 50,
-            "referentiels": [
-                "dev-web"
-            ]
-        },
-        {
-            "MatriculePromo": "promo wane",
-            "filiere": "dev-web",
-            "photoPromo": "\/WhatsApp Image 2025-03-18 at 20.54.45.jpeg",
-            "debut": "21\/01\/2025",
-            "fin": "01\/07\/2025",
-            "etat": "inactive",
-            "referentiels": [
-                "dev-web"
-            ]
+            "id": 6,
+            "nom": "Rokhaya Mama Sadio",
+            "date_debut": "2025-04-03",
+            "date_fin": "2025-11-15",
+            "referentiel": "hackeuse",
+            "photo": "\/uploads\/680f17e7c20ec_Ch\u00e9rif Ibrahima Aidara Sadio.jpg",
+            "statut": "inactive"
         }
     ],
     "Referentiels": [
         {
-            "Nom": "Dev-Web",
-            "NombresModule": 8,
-            "NombresApprenant": 50,
-            "Description": "Contre-indices de synth\u00e9tique, le r\u00e9f\u00e9rence digital pathique...",
-            "PhotoRef": "\/WhatsApp Image 2025-03-18 at 20.51.16 (1).jpeg",
-            "statut": "inactive"
+            "id": 1,
+            "libelle": "hackeuse",
+            "description": "cguuu",
+            "promotion": "promotion2028"
         },
         {
-            "Nom": "Ref-digital",
-            "NombresModule": 8,
-            "NombresApprenant": 50,
-            "Description": "Contre-indices de synth\u00e9tique, le r\u00e9f\u00e9rence digital pathique...",
-            "PhotoRef": "\/WhatsApp Image 2025-03-18 at 20.51.16 (1).jpeg",
-            "statut": "inactive"
+            "id": 2,
+            "libelle": "dev wev",
+            "description": "ccccccccccccccccccccccccccccccccccccc",
+            "promotion": "promotion2076"
         },
         {
-            "Nom": "hackeuse",
-            "NombresModule": 8,
-            "NombresApprenant": 30,
-            "Description": "Contre-indices de synth\u00e9tique, le r\u00e9f\u00e9rence digital pathique...",
-            "PhotoRef": "\/WhatsApp Image 2025-03-18 at 20.51.16 (1).jpeg",
-            "statut": "inactive"
+            "id": 3,
+            "libelle": "Dev-Data",
+            "description": "wesh wesh",
+            "promotion": "promotion2027"
         },
         {
-            "Nom": "dev-data",
-            "NombresModule": 8,
-            "NombresApprenant": 50,
-            "Description": "Contre-indices de synth\u00e9tique, le r\u00e9f\u00e9rence digital pathique...",
-            "PhotoRef": "\/WhatsApp Image 2025-03-18 at 20.51.16 (1).jpeg",
-            "statut": "inactive"
+            "id": 4,
+            "libelle": "hackeuse",
+            "description": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+            "promotion": "promotion2029"
         },
         {
-            "Nom": "AWS",
-            "NombresModule": 3,
-            "Description": "server & cloud",
-            "NombresApprenant": 30,
-            "photoRef": "\/WhatsApp Image 2025-03-18 at 20.51.16 (1).jpeg",
-            "statut": "inactive"
+            "id": 5,
+            "libelle": "AWS",
+            "description": "cccc",
+            "promotion": "promotion2028"
+        }
+    ],
+    "Referentiel": [
+        {
+            "id": 1,
+            "nom": "khalil",
+            "description": "vvvvvvvvvvvvv",
+            "capacite": 30,
+            "sessions": 1,
+            "photo": "public\/uploads\/referentiels\/6811ddacef605_Capture d\u2019\u00e9cran du 2025-04-26 18-17-36.png",
+            "statut": "actif"
+        },
+        {
+            "id": 2,
+            "nom": "",
+            "description": "vvvvvvvvvvvvvvvvvvvvv",
+            "capacite": 30,
+            "sessions": 1,
+            "photo": "",
+            "statut": "actif"
+        },
+        {
+            "id": 3,
+            "nom": "Ref-Dig",
+            "description": "xsxcsqsfzezgvsd",
+            "capacite": 20,
+            "sessions": 2,
+            "photo": "",
+            "statut": "actif"
+        },
+        {
+            "id": 4,
+            "nom": "Ref-Dig",
+            "description": "xsxsxsxsxsxsxsxsxsxsxsxsxsxsxs",
+            "capacite": 30,
+            "sessions": 1,
+            "photo": "",
+            "statut": "actif"
+        },
+        {
+            "id": 5,
+            "nom": "AIDARA SADIO",
+            "description": "wwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwww",
+            "capacite": 30,
+            "sessions": 1,
+            "photo": "",
+            "statut": "actif"
+        },
+        {
+            "id": 6,
+            "nom": "Rokhaya Mama ",
+            "description": "bbbxbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+            "capacite": 30,
+            "sessions": 2,
+            "photo": "",
+            "statut": "actif"
+        },
+        {
+            "id": 7,
+            "nom": "az",
+            "description": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+            "capacite": 30,
+            "sessions": 1,
+            "photo": "",
+            "statut": "actif"
+        },
+        {
+            "id": 8,
+            "nom": "",
+            "description": "vvvvvvvvvvvvvvvvvvvvvvvvv",
+            "capacite": 30,
+            "sessions": 1,
+            "photo": "",
+            "statut": "actif"
+        }
+    ],
+    "Apprenants": [
+        {
+            "id": 1,
+            "matricule": "AP001",
+            "nom": "Moussa Diop",
+            "adresse": "Dakar, S\u00e9n\u00e9gal",
+            "telephone": "77 123 45 67",
+            "referentiel": "DEV WEB\/MOBILE",
+            "statut": "Actif"
+        },
+        {
+            "id": 2,
+            "matricule": "AP002",
+            "nom": "Fatou Sow",
+            "adresse": "Pikine, S\u00e9n\u00e9gal",
+            "telephone": "76 234 56 78",
+            "referentiel": "REF DIG",
+            "statut": "Actif"
+        },
+        {
+            "id": 3,
+            "matricule": "AP003",
+            "nom": "Omar Fall",
+            "adresse": "Gu\u00e9diawaye, S\u00e9n\u00e9gal",
+            "telephone": "70 345 67 89",
+            "referentiel": "DEV DATA",
+            "statut": "Rejet\u00e9"
         }
     ]
 }

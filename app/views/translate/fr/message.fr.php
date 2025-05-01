@@ -1,2 +1,0 @@
-<?php
-// Messages en français

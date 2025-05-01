@@ -1,140 +1,121 @@
 <?php
 
-declare(strict_types=1);
+define('APP_PATH', __DIR__ . '/../');
+define('BASE_URL', '/projets/ges-apprenant');
 
-use App\Controllers;
-use App\Enums\Fonction\Fonction;
+require_once APP_PATH . 'controller/controller.php'; // Inclure le fichier contenant render()
 
-$controller = __DIR__ . Chemins::Controller->value;
+session_start();
 
-$path = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
-
-$allowedPaths = ['/login', '/logout', '/MDP'];
-
-if (in_array($path, $allowedPaths, true)) {
-    $authController = require __DIR__ . Chemins::Controller->value;
-
-    if ($path === '/login') {
-        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-            $authController['login']($_POST);
-        } else {
-            include __DIR__ . Chemins::ViewLogin->value;
-        }
-    } elseif ($path === '/logout') {
-        $authController['logout']();
-    } elseif ($path === '/MDP') {
-        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-            $authController['changerPassword']($_POST);
-        } else {
-            include __DIR__ . Chemins::ChangePass->value;
-        }
-    }
-
-    exit;
+// Vérifiez si l'utilisateur est connecté
+if (!isset($_SESSION['user']) && ($_REQUEST['route'] ?? '') !== 'login') {
+    header('Location: index.php?route=login');
+    exit();
 }
 
-if (!isset($_SESSION['user'])) {
-    header('Location: /login');
-    exit;
-}
+$route = $_REQUEST['route'] ?? 'dashboard';
 
-$promotionController = require __DIR__ . Chemins::PromoController->value;
-$referentielController = require __DIR__ . Chemins::RefController->value;
-$authController = require __DIR__ . Chemins::Controller->value;
-
-$routes = [
-    '/promotion' => function () use ($promotionController) {
-        $recherche = $_GET['recherche'] ?? '';
-        if (!empty($recherche)) {
-            $promotionController['trouverPromoGrille']($recherche);
-        } else {
-            $promotionController['afficherAllPromo']();
-        }
+$result = match ($route) {
+    'login' => function () {
+        require_once APP_PATH . 'controller/login.controller.php';
+        login_index();
     },
-
-    '/promotion/active' => function () use ($promotionController) {
-
-        $nomPromo = $_GET['matriculePromo'] ?? null;
-
-
-        if ($nomPromo) {
-            $promotionController['activePromo']($nomPromo);
-        } else {
-            $promotionController['activePromo']();
-        }
+    'dashboard' => function () {
+        render('dashboard/dashboard');
     },
-
-    '/promotion/liste' => function () use ($promotionController) {
-        $recherche = $_GET['recherche'] ?? '';
-        if (!empty($recherche)) {
-            $promotionController['trouverPromoListe']($recherche);
-        } else {
-            $promotionController['affichageListe']();
-        }
+    'promo' => function () {
+        render('promo/promo');
     },
-    '/promotion/ajout' => function () use ($promotionController, $controller) {
-        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-            $params = [
-                'nomPromo' => $_POST['nomPromo'] ?? '',
-                'date_debut' => $_POST['date_debut'] ?? '',
-                'date_fin' => $_POST['date_fin'] ?? '',
-                'referentiel' => $_POST['referentiel'] ?? '',
-                'photo' => $_FILES['photo'] ?? null,
-            ];
-
-            $erreurs = $promotionController['ajoutPromo'](
-                $params,
-            );
-
-            if (!empty($erreurs)) {
-                $_SESSION['old'] = $params;
-                $_SESSION['erreurs'] = $erreurs;
-                $controller['redirection']("promotion#form-popup");
-                exit;
-            } else {
-                $controller['redirection']("promotion");
-            }
-        }
+    'referentiel' => function () {
+        render('referentiel/referentiel');
     },
-
-
-
-
-
-    '/referentiels' => function () use ($referentielController) {
-    $recherche = $_GET['recherche'] ?? '';
-    if (!empty($recherche)) {
-        $referentielController['chercherRef']($recherche);
-    } else {
-        $referentielController['affichageRef']();
-    }
+    'apprenants' => function () {
+        render('apprenant/apprenant');
     },
-
-    '/Tout_referentiels' => $referentielController['affichageToutRef'],
-
-
-'/referentiel/ajout' => function () use ($referentielController) {
-    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-        $params = [
-            'nomRef' => $_POST['nomReferentiel'] ?? '',
-            'description' => $_POST['description'] ?? '',
-            'nbrApprenant' => (int)($_POST['capacite'] ?? 0),
-            'nbrModule' => (int)str_replace(' session', '', $_POST['nombre_sessions']) ?? 0,
-            'photo' => $_FILES['photo'] ?? null,
+    'presences' => function () {
+        render('presences/presences');
+    },
+    'kits' => function () {
+        render('kits/kits');
+    },
+    'rapports' => function () {  
+        render('rapports/rapports');   
+    },
+    'logout' => function () {
+        session_destroy();
+        header('Location: index.php?route=login');
+        exit();
+    },
+    'addpromotion' => function () {
+        require_once APP_PATH . 'controller/promo.controller.php';
+        promo_add();
+    },
+    'activatepromo' => function () {
+        require_once APP_PATH . 'controller/promo.controller.php';
+        promo_activate($_GET['id']);
+    },
+    'addreferentiel' => function () {
+        $content = APP_PATH . '/views/referentiel/addreferentiel.php'; // Chemin vers la page
+        require_once APP_PATH . '/views/layout/base.layout.php'; // Inclure le layout
+    },
+    'savereferentiel' => function () {
+        require_once APP_PATH . 'controller/referentiel.controller.php';
+        save_referentiel();
+    },
+    'toutreferentiel' => function () {
+        $content = APP_PATH . '/views/referentiel/tout_referentiel.php';
+        require_once APP_PATH . '/views/layout/base.layout.php';
+    },
+    'ajoutref' => function () {
+        $content = APP_PATH . '/views/referentiel/ajoutref.php';
+        require_once APP_PATH . '/views/layout/base.layout.php';
+    },
+    'apprenant' => function() {
+        require_once APP_PATH . 'controller/apprenant.controller.php';
+        $content = APP_PATH . '/views/apprenant/apprenant.php';
+        $apprenants = get_filtered_apprenants();
+        $referentiels = ['DEV WEB/MOBILE', 'REF DIG', 'DEV DATA', 'AWS', 'HACKFUSE'];
+        $statuts = ['Actif', 'Rejeté'];
+        
+        // Passer les variables à inclure
+        $data = [
+            'apprenants' => $apprenants,
+            'referentiels' => $referentiels,
+            'statuts' => $statuts
         ];
-
-    
-        $referentielController[Fonction::ajouterRef->value]($params);
+        
+        // Extraire les variables pour les rendre disponibles dans la vue
+        extract($data);
+        
+        require_once APP_PATH . '/views/layout/base.layout.php';
+    },
+    'exportapprenants' => function() {
+        require_once APP_PATH . 'controller/apprenant.controller.php';
+        export_apprenants();
+    },
+    'ajoutapprenant' => function() {
+        $referentiels = ['DEV WEB/MOBILE', 'REF DIG', 'DEV DATA', 'AWS', 'HACKFUSE'];
+        $statuts = ['Actif', 'Rejeté'];
+        
+        $content = APP_PATH . '/views/apprenant/ajoutapprenant.php';
+        
+        // Passer les variables à la vue
+        $data = [
+            'referentiels' => $referentiels,
+            'statuts' => $statuts
+        ];
+        
+        extract($data);
+        require_once APP_PATH . '/views/layout/base.layout.php';
+    },
+    'saveapprenant' => function() {
+        require_once APP_PATH . 'controller/apprenant.controller.php';
+        save_apprenant();
+    },
+    default => function () {
+        // Affiche la page 404 hors du layout
+        require_once APP_PATH . 'views/acceuil/erreur404.php';
     }
-},
+};
 
-
-];
-
-if (isset($routes[$path])) {
-    $handler = $routes[$path];
-    $handler();
-} else {
-    http_response_code(404);
-    include __DIR__ . Chemins::Erreur404->value;
-}
+$result();

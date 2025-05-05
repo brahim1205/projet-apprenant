@@ -40,19 +40,3 @@ function require_auth() {
         redirect('login');
     }
 }
-
-function check_upload_directories() {
-    $upload_dirs = [
-        APP_PATH . '../public/uploads/',
-        APP_PATH . '../public/uploads/apprenants/'
-    ];
-    
-    foreach ($upload_dirs as $dir) {
-        if (!file_exists($dir)) {
-            mkdir($dir, 0777, true);
-        }
-    }
-}
-
-// Appeler cette fonction au démarrage
-check_upload_directories();

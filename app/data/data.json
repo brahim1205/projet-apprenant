@@ -93,6 +93,15 @@
             "referentiel": "hackeuse",
             "photo": "\/uploads\/680f17e7c20ec_Ch\u00e9rif Ibrahima Aidara Sadio.jpg",
             "statut": "inactive"
+        },
+        {
+            "id": 7,
+            "nom": "Promotion nekh",
+            "date_debut": "2025-05-01",
+            "date_fin": "2025-10-25",
+            "referentiel": "dev-web",
+            "photo": null,
+            "statut": "inactive"
         }
     ],
     "Referentiels": [
@@ -157,8 +166,8 @@
         },
         {
             "id": 4,
-            "nom": "Ref-Dig",
-            "description": "xsxsxsxsxsxsxsxsxsxsxsxsxsxsxs",
+            "nom": "",
+            "description": "cccccccccccccccccccccccccc",
             "capacite": 30,
             "sessions": 1,
             "photo": "",
@@ -166,8 +175,8 @@
         },
         {
             "id": 5,
-            "nom": "AIDARA SADIO",
-            "description": "wwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwww",
+            "nom": "Rokhaya Mama Sadio",
+            "description": "vvvvvvvvvvvvvvvvvvvvvvvvvv",
             "capacite": 30,
             "sessions": 1,
             "photo": "",
@@ -175,17 +184,17 @@
         },
         {
             "id": 6,
-            "nom": "Rokhaya Mama ",
-            "description": "bbbxbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+            "nom": "AIDARA SADIO",
+            "description": "bbbbbbbbbbbbbbbbbbb",
             "capacite": 30,
-            "sessions": 2,
+            "sessions": 1,
             "photo": "",
             "statut": "actif"
         },
         {
             "id": 7,
-            "nom": "az",
-            "description": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+            "nom": "vvvvvvvvvvvvvvv",
+            "description": "bbbbbbbbbbbbb",
             "capacite": 30,
             "sessions": 1,
             "photo": "",
@@ -193,41 +202,30 @@
         },
         {
             "id": 8,
-            "nom": "",
-            "description": "vvvvvvvvvvvvvvvvvvvvvvvvv",
+            "nom": "Ref-Dig",
+            "description": "bhbhbhbhbhbhh",
             "capacite": 30,
             "sessions": 1,
             "photo": "",
             "statut": "actif"
-        }
-    ],
-    "Apprenants": [
-        {
-            "id": 1,
-            "matricule": "AP001",
-            "nom": "Moussa Diop",
-            "adresse": "Dakar, S\u00e9n\u00e9gal",
-            "telephone": "77 123 45 67",
-            "referentiel": "DEV WEB\/MOBILE",
-            "statut": "Actif"
         },
         {
-            "id": 2,
-            "matricule": "AP002",
-            "nom": "Fatou Sow",
-            "adresse": "Pikine, S\u00e9n\u00e9gal",
-            "telephone": "76 234 56 78",
-            "referentiel": "REF DIG",
-            "statut": "Actif"
+            "id": 9,
+            "nom": "khalil",
+            "description": "nnnnnnnnnnnnnnnnnnn",
+            "capacite": 30,
+            "sessions": 1,
+            "photo": "",
+            "statut": "actif"
         },
         {
-            "id": 3,
-            "matricule": "AP003",
-            "nom": "Omar Fall",
-            "adresse": "Gu\u00e9diawaye, S\u00e9n\u00e9gal",
-            "telephone": "70 345 67 89",
-            "referentiel": "DEV DATA",
-            "statut": "Rejet\u00e9"
+            "id": 10,
+            "nom": "Assistante Hackeuse",
+            "description": "xcxcccscxcscx",
+            "capacite": 30,
+            "sessions": 1,
+            "photo": "",
+            "statut": "actif"
         }
     ]
 }

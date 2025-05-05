@@ -33,7 +33,7 @@
             <h5>Bienvenue sur</h5>
             <h5 class="ECSA">Ecole du code Sonatel Academy</h5>
         </div>
-        <div class="seConnecter">Se Connecter</div>
+        <div class="seConnecter">Se Connecter </div>
         <?php if (!empty($error)): ?>
             <div class="error-message" style="color: red; text-align: center;">
                 <?= htmlspecialchars($error) ?>
@@ -49,7 +49,7 @@
                 <input type="password" id="password" name="password" placeholder="mot de passe" >
             </div>
             <div class="mdpOublie">
-                <a href="/projets/ges-apprenant/forgetPassword">Mot de passe oublié ?</a>
+                <a href="index.php?route=forgot-password">Mot de passe oublié ?</a>
             </div>
             <div class="bc">
                 <input class="btnSeConnecter" type="submit" value="Se connecter">

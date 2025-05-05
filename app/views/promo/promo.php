@@ -25,7 +25,7 @@ $filtered_promotions = array_filter($promotions, function ($promo) use ($search)
 <head>
   
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    <link rel="stylesheet" href="/assets/css/promo.css">
+    <link rel="stylesheet" href="http://<?= $_SERVER['HTTP_HOST'] ; ?>/assets/css/promo.css">
 </head>
 
     <!-- Main Content -->

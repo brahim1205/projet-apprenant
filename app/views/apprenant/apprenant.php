@@ -1,3 +1,4 @@
+
 <head>
 
     <link rel="stylesheet" href="/assets/css/apprenant.css">
@@ -10,57 +11,32 @@
            
             
             <div class="page-title">
-                Apprenants 
-                <span class="apprentice-count">
-                    <?php echo isset($apprenants) ? count($apprenants) : '0'; ?> apprenants
-                </span>
+                Apprenants <span class="apprentice-count">151 apprenants</span>
             </div>
             
-            <form method="GET" action="index.php" class="filters">
-                <input type="hidden" name="route" value="apprenant">
-                
+            <div class="filters">
                 <div class="search-input">
-                    <input type="text" name="search" placeholder="Rechercher..." 
-                           value="<?php echo htmlspecialchars($_GET['search'] ?? ''); ?>">
+                    <input type="text" placeholder="Rechercher...">
                 </div>
-                
                 <div class="filter-dropdown">
-                    <select name="referentiel">
-                        <option value="">Tous les référentiels</option>
-                        <?php foreach ($referentiels as $ref): ?>
-                            <option value="<?php echo $ref; ?>" 
-                                <?php echo ($_GET['referentiel'] ?? '') === $ref ? 'selected' : ''; ?>>
-                                <?php echo $ref; ?>
-                            </option>
-                        <?php endforeach; ?>
+                    <select>
+                        <option>Filtre par classe</option>
                     </select>
                 </div>
-                
                 <div class="filter-dropdown">
-                    <select name="statut">
-                        <option value="">Tous les statuts</option>
-                        <?php foreach ($statuts as $statut): ?>
-                            <option value="<?php echo $statut; ?>"
-                                <?php echo ($_GET['statut'] ?? '') === $statut ? 'selected' : ''; ?>>
-                                <?php echo $statut; ?>
-                            </option>
-                        <?php endforeach; ?>
+                    <select>
+                        <option>Filtre par status</option>
                     </select>
                 </div>
-                
-                <button type="submit" class="btn btn-filter">Filtrer</button>
-            </form>
+            </div>
             
             <div class="action-buttons">
-                <form method="POST" action="index.php?route=exportapprenants">
-                    <input type="hidden" name="filtered_data" value="<?php echo htmlspecialchars(json_encode($apprenants)); ?>">
-                    <button type="submit" class="btn btn-outline">
-                        <i class="fas fa-download"></i> Télécharger la liste
-                    </button>
-                </form>
-                <a href="index.php?route=ajoutapprenant" class="btn btn-primary">
+                <button class="btn btn-outline">
+                    <i class="fas fa-download"></i> Télécharger la liste
+                </button>
+                <button class="btn btn-primary">
                     <i class="fas fa-plus"></i> Ajouter apprenant
-                 </a>
+                </button>
             </div>
             
             <div class="tabs">
@@ -83,47 +59,127 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <?php if (isset($apprenants) && is_array($apprenants)): ?>
-                            <?php foreach ($apprenants as $apprenant): ?>
-                                <tr>
-                                    <td>
-                                        <img src="<?php echo !empty($apprenant['photo']) ? 
-                                            htmlspecialchars($apprenant['photo']) : 
-                                            '/assets/images/default-profile.png'; ?>" 
-                                            alt="Profile" class="profile-pic">
-                                    </td>
-                                    <td><?php echo htmlspecialchars($apprenant['matricule']); ?></td>
-                                    <td><?php echo htmlspecialchars($apprenant['nom']); ?></td>
-                                    <td><?php echo htmlspecialchars($apprenant['adresse']); ?></td>
-                                    <td><?php echo htmlspecialchars($apprenant['telephone']); ?></td>
-                                    <td>
-                                        <span class="referentiel ref-<?php echo strtolower(str_replace(' ', '-', $apprenant['referentiel'])); ?>">
-                                            <?php echo htmlspecialchars($apprenant['referentiel']); ?>
-                                        </span>
-                                    </td>
-                                    <td>
-                                        <span class="status status-<?php echo strtolower($apprenant['statut']); ?>">
-                                            <?php echo htmlspecialchars($apprenant['statut']); ?>
-                                        </span>
-                                    </td>
-                                    <td class="action-menu">
-                                        <a href="index.php?route=editapprenant&id=<?php echo $apprenant['id']; ?>" class="btn-edit">
-                                            <i class="fas fa-edit"></i>
-                                        </a>
-                                        <form method="POST" action="index.php?route=deleteapprenant" style="display: inline;">
-                                            <input type="hidden" name="id" value="<?php echo $apprenant['id']; ?>">
-                                            <button type="submit" class="btn-delete" onclick="return confirm('Êtes-vous sûr de vouloir supprimer cet apprenant ?')">
-                                                <i class="fas fa-trash"></i>
-                                            </button>
-                                        </form>
-                                    </td>
-                                </tr>
-                            <?php endforeach; ?>
-                        <?php else: ?>
-                            <tr>
-                                <td colspan="7" class="text-center">Aucun apprenant trouvé</td>
-                            </tr>
-                        <?php endif; ?>
+                        <tr>
+                            <td><img src="/api/placeholder/40/40" alt="Profile" class="profile-pic"></td>
+                            <td>1058215</td>
+                            <td>Seydina Mouhamadoul Diop</td>
+                            <td>Sicap Liberté 6 villa 6059 Dakar, Sénégal</td>
+                            <td>785993546</td>
+                            <td><span class="referentiel ref-web">DEV WEB/MOBILE</span></td>
+                            <td><span class="status status-active">Actif</span></td>
+                            <td class="action-menu">...</td>
+                        </tr>
+                        <tr>
+                            <td><img src="/api/placeholder/40/40" alt="Profile" class="profile-pic"></td>
+                            <td>1058216</td>
+                            <td>Mamadou Guèye</td>
+                            <td>Keur Mbaye Fall Dakar, Sénégal</td>
+                            <td>783116655</td>
+                            <td><span class="referentiel ref-dig">REF DIG</span></td>
+                            <td><span class="status status-active">Actif</span></td>
+                            <td class="action-menu">...</td>
+                        </tr>
+                        <tr>
+                            <td><img src="/api/placeholder/40/40" alt="Profile" class="profile-pic"></td>
+                            <td>1058217</td>
+                            <td>Ndéaga Lo</td>
+                            <td>Sicap Derkle Dakar, Sénégal</td>
+                            <td>784559930</td>
+                            <td><span class="referentiel ref-data">DEV DATA</span></td>
+                            <td><span class="status status-active">Actif</span></td>
+                            <td class="action-menu">...</td>
+                        </tr>
+                        <tr>
+                            <td><img src="/api/placeholder/40/40" alt="Profile" class="profile-pic"></td>
+                            <td>1058218</td>
+                            <td>Seydina Mouhamadoul Diop</td>
+                            <td>Sicap Liberté 6 villa 6059 Dakar, Sénégal</td>
+                            <td>785993546</td>
+                            <td><span class="referentiel">AWS</span></td>
+                            <td><span class="status status-active">Actif</span></td>
+                            <td class="action-menu">...</td>
+                        </tr>
+                        <tr>
+                            <td><img src="/api/placeholder/40/40" alt="Profile" class="profile-pic"></td>
+                            <td>1058219</td>
+                            <td>Seydina Mouhamadoul Diop</td>
+                            <td>Sicap Liberté 6 villa 6059 Dakar, Sénégal</td>
+                            <td>785993546</td>
+                            <td><span class="referentiel ref-web">DEV WEB/MOBILE</span></td>
+                            <td><span class="status status-active">Actif</span></td>
+                            <td class="action-menu">...</td>
+                        </tr>
+                        <tr>
+                            <td><img src="/api/placeholder/40/40" alt="Profile" class="profile-pic"></td>
+                            <td>1058220</td>
+                            <td>Seydina Mouhamadoul Diop</td>
+                            <td>Sicap Liberté 6 villa 6059 Dakar, Sénégal</td>
+                            <td>785993546</td>
+                            <td><span class="referentiel ref-web">DEV WEB/MOBILE</span></td>
+                            <td><span class="status status-rejected">Rejeté</span></td>
+                            <td class="action-menu">...</td>
+                        </tr>
+                        <tr>
+                            <td><img src="/api/placeholder/40/40" alt="Profile" class="profile-pic"></td>
+                            <td>1058221</td>
+                            <td>Seydina Mouhamadoul Diop</td>
+                            <td>Sicap Liberté 6 villa 6059 Dakar, Sénégal</td>
+                            <td>785993546</td>
+                            <td><span class="referentiel ref-hack">HACKFUSE</span></td>
+                            <td><span class="status status-active">Actif</span></td>
+                            <td class="action-menu">...</td>
+                        </tr>
+                        <tr>
+                            <td><img src="/api/placeholder/40/40" alt="Profile" class="profile-pic"></td>
+                            <td>1058222</td>
+                            <td>Seydina Mouhamadoul Diop</td>
+                            <td>Sicap Liberté 6 villa 6059 Dakar, Sénégal</td>
+                            <td>785993546</td>
+                            <td><span class="referentiel ref-dig">REF DIG</span></td>
+                            <td><span class="status status-active">Actif</span></td>
+                            <td class="action-menu">...</td>
+                        </tr>
+                        <tr>
+                            <td><img src="/api/placeholder/40/40" alt="Profile" class="profile-pic"></td>
+                            <td>1058223</td>
+                            <td>Seydina Mouhamadoul Diop</td>
+                            <td>Sicap Liberté 6 villa 6059 Dakar, Sénégal</td>
+                            <td>785993546</td>
+                            <td><span class="referentiel ref-dig">REF DIG</span></td>
+                            <td><span class="status status-active">Actif</span></td>
+                            <td class="action-menu">...</td>
+                        </tr>
+                        <tr>
+                            <td><img src="/api/placeholder/40/40" alt="Profile" class="profile-pic"></td>
+                            <td>1058224</td>
+                            <td>Ousmayou Diédhiou</td>
+                            <td>Sicap Liberté 6 villa 6059 Dakar, Sénégal</td>
+                            <td>785993546</td>
+                            <td><span class="referentiel ref-web">DEV WEB/MOBILE</span></td>
+                            <td><span class="status status-active">Actif</span></td>
+                            <td class="action-menu">...</td>
+                        </tr>
+                        <tr>
+                            <td><img src="/api/placeholder/40/40" alt="Profile" class="profile-pic"></td>
+                            <td>1058224</td>
+                            <td>Ousmayou Diédhiou</td>
+                            <td>Sicap Liberté 6 villa 6059 Dakar, Sénégal</td>
+                            <td>785993546</td>
+                            <td><span class="referentiel ref-web">DEV WEB/MOBILE</span></td>
+                            <td><span class="status status-active">Actif</span></td>
+                            <td class="action-menu">...</td>
+                        </tr>
+
+                        <tr>
+                            <td><img src="/api/placeholder/40/40" alt="Profile" class="profile-pic"></td>
+                            <td>1058224</td>
+                            <td>Ousmayou Diédhiou</td>
+                            <td>Sicap Liberté 6 villa 6059 Dakar, Sénégal</td>
+                            <td>785993546</td>
+                            <td><span class="referentiel ref-web">DEV WEB/MOBILE</span></td>
+                            <td><span class="status status-active">Actif</span></td>
+                            <td class="action-menu">...</td>
+                        </tr>
                     </tbody>
                 </table>
             </div>

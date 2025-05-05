@@ -11,7 +11,8 @@
     <link href="https://cdn.jsdelivr.net/npm/remixicon/fonts/remixicon.css" rel="stylesheet">
     <link rel="stylesheet" href="/assets/css/addreferentiel.css">
 
-  <link rel="stylesheet" href="/assets/css/promo.css">
+  <link rel="stylesheet" href="http://<?= $_SERVER['HTTP_HOST'] ; ?>/assets/css/promo.css">
+  
 
 </head>
 <body>

@@ -1,4 +1,31 @@
 <?php
+require_once APP_PATH . 'services/referentiel.service.php';
+
+$referentielController = [
+    'index' => function() use ($referentielServices) {
+        $search = $_GET['search'] ?? '';
+        $referentiels = $referentielServices['filterReferentiels']($search);
+        
+        return [
+            'referentiels' => $referentiels,
+            'search' => $search,
+            'content' => 'referentiel/referentiel'
+        ];
+    },
+    
+    'create' => function() use ($referentielServices) {
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            $errors = $referentielServices['validateReferentiel']($_POST);
+            if (empty($errors)) {
+                // Traitement de la création
+                header('Location: index.php?route=referentiel');
+                exit();
+            }
+            return ['errors' => $errors, 'content' => 'referentiel/ajoutref'];
+        }
+        return ['content' => 'referentiel/ajoutref'];
+    }
+];
 
 function referentiel_index() {
     // Inclure la vue correspondante

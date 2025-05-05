@@ -41,8 +41,12 @@ $result = match ($route) {
     'rapports' => function () {  
         render('rapports/rapports');   
     },
+    'forgot-password' => function() {
+        render('login/forgot-password');
+    },
     'logout' => function () {
         session_destroy();
+        session_unset();
         header('Location: index.php?route=login');
         exit();
     },
@@ -69,48 +73,6 @@ $result = match ($route) {
     'ajoutref' => function () {
         $content = APP_PATH . '/views/referentiel/ajoutref.php';
         require_once APP_PATH . '/views/layout/base.layout.php';
-    },
-    'apprenant' => function() {
-        require_once APP_PATH . 'controller/apprenant.controller.php';
-        $content = APP_PATH . '/views/apprenant/apprenant.php';
-        $apprenants = get_filtered_apprenants();
-        $referentiels = ['DEV WEB/MOBILE', 'REF DIG', 'DEV DATA', 'AWS', 'HACKFUSE'];
-        $statuts = ['Actif', 'Rejeté'];
-        
-        // Passer les variables à inclure
-        $data = [
-            'apprenants' => $apprenants,
-            'referentiels' => $referentiels,
-            'statuts' => $statuts
-        ];
-        
-        // Extraire les variables pour les rendre disponibles dans la vue
-        extract($data);
-        
-        require_once APP_PATH . '/views/layout/base.layout.php';
-    },
-    'exportapprenants' => function() {
-        require_once APP_PATH . 'controller/apprenant.controller.php';
-        export_apprenants();
-    },
-    'ajoutapprenant' => function() {
-        $referentiels = ['DEV WEB/MOBILE', 'REF DIG', 'DEV DATA', 'AWS', 'HACKFUSE'];
-        $statuts = ['Actif', 'Rejeté'];
-        
-        $content = APP_PATH . '/views/apprenant/ajoutapprenant.php';
-        
-        // Passer les variables à la vue
-        $data = [
-            'referentiels' => $referentiels,
-            'statuts' => $statuts
-        ];
-        
-        extract($data);
-        require_once APP_PATH . '/views/layout/base.layout.php';
-    },
-    'saveapprenant' => function() {
-        require_once APP_PATH . 'controller/apprenant.controller.php';
-        save_apprenant();
     },
     default => function () {
         // Affiche la page 404 hors du layout

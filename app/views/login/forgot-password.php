@@ -4,26 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="assets/css/login.css">
-
     <title>Mot de passe oublié</title>
-    <style>
-        input {
-            position: relative;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            height: 80%;
-            width: 100%;
-            padding-left: 10px;
-            border-radius: 5px 5px 5px 5px;
-            border: solid 1px #00000080;
-        }
-
-        input:focus {
-            outline: none;
-            border: solid 1px var(--orange);
-        }
-    </style>
 </head>
 <body>
     <div class="container">
